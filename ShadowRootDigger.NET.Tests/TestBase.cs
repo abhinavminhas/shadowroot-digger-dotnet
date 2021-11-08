@@ -11,7 +11,7 @@ namespace ShadowRootDigger.NET.Tests
     public class TestBase
     {
         internal IWebDriver WebDriver;
-        private readonly string _chromeDriverVersion = "92.0.4515.107";
+        private readonly string _chromeDriverVersion = "Latest";
 
         [TestInitialize]
         public void GetChromeDriver()

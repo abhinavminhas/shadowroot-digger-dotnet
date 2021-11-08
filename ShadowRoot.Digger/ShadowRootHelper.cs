@@ -40,7 +40,7 @@ namespace ShadowRoot.Digger
                     };
                     webDriverWait.Until(item => (IWebElement)((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
                 }
-                catch (WebDriverTimeoutException) { throw new Exception(string.Format("{0}: Shadow root element for selector '{1}' in DOM hierarchy '{2}' Not Found.", MethodBase.GetCurrentMethod().Name, shadowRoot, shadowRootElement)); }
+                catch (WebDriverException) { throw new WebDriverException(string.Format("{0}: Shadow root element for selector '{1}' in DOM hierarchy '{2}' Not Found.", MethodBase.GetCurrentMethod().Name, shadowRoot, shadowRootElement)); }
             }
             var requiredShadowRoot = (IWebElement)((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
             webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(GlobalDriverImplicitWait);

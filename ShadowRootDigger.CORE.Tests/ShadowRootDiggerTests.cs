@@ -7,7 +7,6 @@ using System.Linq;
 namespace ShadowRootDigger.CORE.Tests
 {
     [TestClass]
-    [TestCategory("TESTS-DOTNETCORE")]
     public class ShadowRootDiggerTests : TestBase
     {
         private readonly string _tabRootElement = "settings-ui > settings-main#main > settings-basic-page.cr-centered-card-container > settings-privacy-page > settings-clear-browsing-data-dialog > cr-tabs[role=\"tablist\"]";
@@ -17,8 +16,10 @@ namespace ShadowRootDigger.CORE.Tests
         private readonly string _selectTimeRangeIdentifier = "select#dropdownMenu";
         private readonly string _basicTabCheckboxesIdentifier = "settings-checkbox[id*=\"CheckboxBasic\"]";
         private readonly string _buttonClearDataIdentifier = "#clearBrowsingDataConfirm";
+        private readonly string _notexistsRootElement = "settings-ui > settings-main.main";
 
         [TestMethod]
+        [TestCategory("TESTS-DOTNETCORE")]
         public void Test_GetNestedShadowRootElement_ClearChromeData()
         {
             WebDriver.Navigate().GoToUrl("https://www.google.com");
@@ -38,7 +39,21 @@ namespace ShadowRootDigger.CORE.Tests
                     checkbox.Click();
             }
             clearBrowsingDataDialog.FindElement(By.CssSelector(_buttonClearDataIdentifier)).Click();
-            System.Threading.Thread.Sleep(8000);
+        }
+
+        [TestMethod]
+        [TestCategory("TESTS-DOTNETCORE")]
+        public void Test_GetNestedShadowRootElement_RootElementDoesNotExists()
+        {
+            var expectedErrorMessage = "GetNestedShadowRootElement: Shadow root element for selector 'settings-main.main' in DOM hierarchy 'return document.querySelector('settings-ui').shadowRoot.querySelector('settings-main.main').shadowRoot;' Not Found.";
+            WebDriver.Navigate().GoToUrl("https://www.google.com");
+            WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
+            try
+            {
+                ShadowRootHelper.GetNestedShadowRootElement(WebDriver, _notexistsRootElement);
+                Assert.Fail("No Exception Thrown.");
+            }
+            catch (WebDriverException ex) { Assert.AreEqual(expectedErrorMessage, ex.Message); }
         }
     }
 }

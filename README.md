@@ -1,2 +1,2 @@
 # shadowroot-digger
-⚡ Shadow root DOM elements finder using Selenium ⚡
+⚡ DOM shadow root elements finder with Selenium ⚡

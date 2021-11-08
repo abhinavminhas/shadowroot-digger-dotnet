@@ -18,9 +18,10 @@ namespace ShadowRootDigger.CORE.Tests
         {
             new DriverManager().SetUpDriver(new ChromeConfig(), version: _chromeDriverVersion);
             ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.AddArguments("--disable-infobars");
+            chromeOptions.AddArguments("disable-infobars");
             chromeOptions.AddArguments("--disable-notifications");
             chromeOptions.AddArgument("--no-sandbox");
+            chromeOptions.AddArgument("--disable-dev-shm-usage");
             WebDriver = new ChromeDriver(chromeOptions);
             WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(40);
             WebDriver.Manage().Window.Maximize();

@@ -1,0 +1,44 @@
+name: Code Coverage
+
+on:
+  push:
+    branches: [ main, dev ]
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    branches: [ main ]
+    paths-ignore:
+      - '**.md'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ windows-latest ]
+        dotnet-version: [ '3.1.x' ]
+        
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Dotnet Version (${{ matrix.dotnet-version }})
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ matrix.dotnet-version }}
+        
+    - name: Build
+      run: dotnet build ShadowRootDigger.CORE.Tests/ShadowRootDigger.CORE.Tests.csproj --configuration Release
+        
+    - name: Test
+      if: ${{ matrix.dotnet-version == '3.1.x' }}
+      run: dotnet test --no-build --verbosity normal --configuration Release --settings:Test.runsettings --filter TestCategory=TESTS-DOTNETCORE /p:CollectCoverage=true /p:CoverletOutputFormat=lcov
+    
+    - name: Upload Coverage To Codecov
+      uses: codecov/codecov-action@v2
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        directory: ShadowRootDigger.CORE.Tests/

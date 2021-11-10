@@ -43,7 +43,7 @@ jobs:
       uses: darenm/Setup-VSTest@v1
       
     - name: Test
-      run: vstest.console.exe ${{ github.workspace }}\ShadowRootDigger.NET.Tests\bin\Release\ShadowRootDigger.NET.Tests.dll /TestCaseFilter:"TestCategory=TESTS-DOTNETFRAMEWORK"
+      run: vstest.console.exe ${{ github.workspace }}\ShadowRootDigger.NET.Tests\bin\Release\ShadowRootDigger.NET.Tests.dll /Settings:Test.runsettings /TestCaseFilter:"TestCategory=TESTS-DOTNETFRAMEWORK"
     
   
   DotNetCore_OS-Version:
@@ -69,4 +69,4 @@ jobs:
     
     - name: Test
       if: ${{ matrix.os == 'windows-latest' && matrix.dotnet-version == '3.1.x' }}
-      run: dotnet test --no-build --verbosity normal --configuration Release --filter TestCategory=TESTS-DOTNETCORE
+      run: dotnet test --no-build --verbosity normal --configuration Release --settings:Test.runsettings --filter TestCategory=TESTS-DOTNETCORE

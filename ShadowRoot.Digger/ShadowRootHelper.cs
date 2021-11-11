@@ -10,7 +10,7 @@ namespace ShadowRoot.Digger
     {
 
         /// <summary>
-        /// Returns nested shadow root element from a nested list of shadow root element selectors separated by '>'.
+        /// Returns nested shadow root element from DOM hierarchy of shadow root elements with selectors separated by '>'.
         /// </summary>
         /// <param name="webDriver">Selenium webdriver instance.</param>
         /// <param name="shadowRootSelector">List of shadow root element selectors (probably jQuery or CssSelectors) separated by '>'.</param>

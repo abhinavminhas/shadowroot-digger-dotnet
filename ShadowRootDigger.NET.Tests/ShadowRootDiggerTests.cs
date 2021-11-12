@@ -88,5 +88,31 @@ namespace ShadowRootDigger.NET.Tests
             catch (AssertFailedException ex) { throw ex; }
             catch (WebDriverException ex) { Assert.AreEqual(expectedErrorMessage, ex.Message); }
         }
+
+        [TestMethod]
+        [TestCategory("TESTS-DOTNETFRAMEWORK")]
+        public void Test_GetShadowRootElement()
+        {
+            WebDriver.Navigate().GoToUrl("https://www.google.com");
+            WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
+            var clearBrowsingTab = ShadowRootHelper.GetShadowRootElement(WebDriver, "settings-ui");
+            Assert.IsNotNull(clearBrowsingTab);
+        }
+
+        [TestMethod]
+        [TestCategory("TESTS-DOTNETFRAMEWORK")]
+        public void Test_GetShadowRootElement_RootElementDoesNotExists()
+        {
+            var expectedErrorMessage = "GetShadowRootElement: Shadow root element for selector 'not-exists' Not Found.";
+            WebDriver.Navigate().GoToUrl("https://www.google.com");
+            WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
+            try
+            {
+                ShadowRootHelper.GetShadowRootElement(WebDriver, "not-exists");
+                Assert.Fail("No Exception Thrown.");
+            }
+            catch (AssertFailedException ex) { throw ex; }
+            catch (WebDriverException ex) { Assert.AreEqual(expectedErrorMessage, ex.Message); }
+        }
     }
 }

@@ -24,13 +24,13 @@ namespace ShadowRootDigger.CORE.Tests
         {
             WebDriver.Navigate().GoToUrl("https://www.google.com");
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
-            var clearBrowsingTab = ShadowRootHelper.GetNestedShadowRootElement(WebDriver, _tabRootElement);
+            var clearBrowsingTab = ShadowRootAssist.GetNestedShadowRootElement(WebDriver, _tabRootElement);
             clearBrowsingTab.FindElements(By.CssSelector(_divTabIdentifier))
                 .FirstOrDefault(item => item.Text == "Basic").Click();
-            var settingsDropdownMenu = ShadowRootHelper.GetNestedShadowRootElement(WebDriver, _settingsDropdownMenuRootElement);
+            var settingsDropdownMenu = ShadowRootAssist.GetNestedShadowRootElement(WebDriver, _settingsDropdownMenuRootElement);
             var timeRangeSelect = settingsDropdownMenu.FindElement(By.CssSelector(_selectTimeRangeIdentifier));
             new SelectElement(timeRangeSelect).SelectByText("Last hour");
-            var clearBrowsingDataDialog = ShadowRootHelper.GetNestedShadowRootElement(WebDriver, _clearBrowsingDataDialogRootElement);
+            var clearBrowsingDataDialog = ShadowRootAssist.GetNestedShadowRootElement(WebDriver, _clearBrowsingDataDialogRootElement);
             var basicCheckboxes = clearBrowsingDataDialog.FindElements(By.CssSelector(_basicTabCheckboxesIdentifier));
             foreach (var checkbox in basicCheckboxes)
             {
@@ -50,7 +50,7 @@ namespace ShadowRootDigger.CORE.Tests
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
             try
             {
-                ShadowRootHelper.GetNestedShadowRootElement(WebDriver, _notexistsRootElement);
+                ShadowRootAssist.GetNestedShadowRootElement(WebDriver, _notexistsRootElement);
                 Assert.Fail("No Exception Thrown.");
             }
             catch (AssertFailedException ex) { throw ex; }
@@ -63,11 +63,11 @@ namespace ShadowRootDigger.CORE.Tests
         {
             WebDriver.Navigate().GoToUrl("https://www.google.com");
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
-            var exists = ShadowRootHelper.IsNestedShadowRootElementPresent(WebDriver, _tabRootElement);
+            var exists = ShadowRootAssist.IsNestedShadowRootElementPresent(WebDriver, _tabRootElement);
             Assert.AreEqual(true, exists);
-            exists = ShadowRootHelper.IsNestedShadowRootElementPresent(WebDriver, _clearBrowsingDataDialogRootElement);
+            exists = ShadowRootAssist.IsNestedShadowRootElementPresent(WebDriver, _clearBrowsingDataDialogRootElement);
             Assert.AreEqual(true, exists);
-            exists = ShadowRootHelper.IsNestedShadowRootElementPresent(WebDriver, _tabRootElement);
+            exists = ShadowRootAssist.IsNestedShadowRootElementPresent(WebDriver, _tabRootElement);
             Assert.AreEqual(true, exists);
         }
 
@@ -78,11 +78,11 @@ namespace ShadowRootDigger.CORE.Tests
             var expectedErrorMessage = "IsNestedShadowRootElementPresent: Nested shadow root element for selector 'settings-main.main' in DOM hierarchy 'settings-ui > settings-main.main' Not Found.";
             WebDriver.Navigate().GoToUrl("https://www.google.com");
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
-            var exists = ShadowRootHelper.IsNestedShadowRootElementPresent(WebDriver, _notexistsRootElement);
+            var exists = ShadowRootAssist.IsNestedShadowRootElementPresent(WebDriver, _notexistsRootElement);
             Assert.AreEqual(false, exists);
             try
             {
-                ShadowRootHelper.IsNestedShadowRootElementPresent(WebDriver, _notexistsRootElement, throwError: true);
+                ShadowRootAssist.IsNestedShadowRootElementPresent(WebDriver, _notexistsRootElement, throwError: true);
                 Assert.Fail("No Exception Thrown.");
             }
             catch (AssertFailedException ex) { throw ex; }
@@ -95,7 +95,7 @@ namespace ShadowRootDigger.CORE.Tests
         {
             WebDriver.Navigate().GoToUrl("https://www.google.com");
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
-            var clearBrowsingTab = ShadowRootHelper.GetShadowRootElement(WebDriver, "settings-ui");
+            var clearBrowsingTab = ShadowRootAssist.GetShadowRootElement(WebDriver, "settings-ui");
             Assert.IsNotNull(clearBrowsingTab);
         }
 
@@ -108,7 +108,7 @@ namespace ShadowRootDigger.CORE.Tests
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
             try
             {
-                ShadowRootHelper.GetShadowRootElement(WebDriver, "not-exists");
+                ShadowRootAssist.GetShadowRootElement(WebDriver, "not-exists");
                 Assert.Fail("No Exception Thrown.");
             }
             catch (AssertFailedException ex) { throw ex; }

@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace ShadowRoot.Digger
 {
-    public static class ShadowRootHelper
+    public static class ShadowRootAssist
     {
         /// <summary>
         /// Returns shadow root element for provided selector.

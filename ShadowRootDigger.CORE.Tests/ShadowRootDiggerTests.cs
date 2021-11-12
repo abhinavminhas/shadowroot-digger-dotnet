@@ -53,6 +53,7 @@ namespace ShadowRootDigger.CORE.Tests
                 ShadowRootHelper.GetNestedShadowRootElement(WebDriver, _notexistsRootElement);
                 Assert.Fail("No Exception Thrown.");
             }
+            catch (AssertFailedException ex) { throw ex; }
             catch (WebDriverException ex) { Assert.AreEqual(expectedErrorMessage, ex.Message); }
         }
 
@@ -84,6 +85,7 @@ namespace ShadowRootDigger.CORE.Tests
                 ShadowRootHelper.IsNestedShadowRootElementPresent(WebDriver, _notexistsRootElement, throwError: true);
                 Assert.Fail("No Exception Thrown.");
             }
+            catch (AssertFailedException ex) { throw ex; }
             catch (WebDriverException ex) { Assert.AreEqual(expectedErrorMessage, ex.Message); }
         }
     }

@@ -45,7 +45,7 @@ namespace ShadowRootDigger.NET.Tests
         [TestCategory("TESTS-DOTNETFRAMEWORK")]
         public void Test_GetNestedShadowRootElement_RootElementDoesNotExists()
         {
-            var expectedErrorMessage = "GetNestedShadowRootElement: Nested shadow root element for selector 'settings-main.main' in DOM hierarchy 'return document.querySelector('settings-ui').shadowRoot.querySelector('settings-main.main').shadowRoot;' Not Found.";
+            var expectedErrorMessage = "GetNestedShadowRootElement: Nested shadow root element for selector 'settings-main.main' in DOM hierarchy 'settings-ui > settings-main.main' Not Found.";
             WebDriver.Navigate().GoToUrl("https://www.google.com");
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
             try
@@ -75,7 +75,7 @@ namespace ShadowRootDigger.NET.Tests
         [TestCategory("TESTS-DOTNETFRAMEWORK")]
         public void Test_IsNestedShadowRootElementPresent_ShodowRootNotExists()
         {
-            var expectedErrorMessage = "IsNestedShadowRootElementPresent: Nested shadow root element for selector 'settings-main.main' in DOM hierarchy 'return document.querySelector('settings-ui').shadowRoot.querySelector('settings-main.main').shadowRoot;' Not Found.";
+            var expectedErrorMessage = "IsNestedShadowRootElementPresent: Nested shadow root element for selector 'settings-main.main' in DOM hierarchy 'settings-ui > settings-main.main' Not Found.";
             WebDriver.Navigate().GoToUrl("https://www.google.com");
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
             var exists = ShadowRootHelper.IsNestedShadowRootElementPresent(WebDriver, _notexistsRootElement);

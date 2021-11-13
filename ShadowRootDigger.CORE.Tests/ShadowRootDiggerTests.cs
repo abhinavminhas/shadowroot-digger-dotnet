@@ -59,7 +59,7 @@ namespace ShadowRootDigger.CORE.Tests
 
         [TestMethod]
         [TestCategory("TESTS-DOTNETCORE")]
-        public void Test_IsNestedShadowRootElementPresent_ShodowRootExists()
+        public void Test_IsNestedShadowRootElementPresent_NestedShadowRootExists()
         {
             WebDriver.Navigate().GoToUrl("https://www.google.com");
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
@@ -73,7 +73,7 @@ namespace ShadowRootDigger.CORE.Tests
 
         [TestMethod]
         [TestCategory("TESTS-DOTNETCORE")]
-        public void Test_IsNestedShadowRootElementPresent_ShodowRootNotExists()
+        public void Test_IsNestedShadowRootElementPresent_NestedShadowRootNotExists()
         {
             var expectedErrorMessage = "IsNestedShadowRootElementPresent: Nested shadow root element for selector 'settings-main.main' in DOM hierarchy 'settings-ui > settings-main.main' Not Found.";
             WebDriver.Navigate().GoToUrl("https://www.google.com");

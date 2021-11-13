@@ -10,6 +10,7 @@ namespace ShadowRoot.Digger
     {
         /// <summary>
         /// Returns shadow root element for provided selector.
+        /// Throws - 'WebDriverException' incase any shadow root element is not found.
         /// </summary>
         /// <param name="webDriver">Selenium webdriver instance.</param>
         /// <param name="shadowRootSelector">Shadow root element selectors (probably jQuery or CssSelectors).</param>
@@ -38,6 +39,7 @@ namespace ShadowRoot.Digger
 
         /// <summary>
         /// Returns nested shadow root element from DOM hierarchy of shadow root elements with selectors separated by '>'.
+        /// Throws - 'WebDriverException' incase any shadow root element is not found in the nested hierarchy.
         /// </summary>
         /// <param name="webDriver">Selenium webdriver instance.</param>
         /// <param name="shadowRootSelectors">List of shadow root element selectors (probably jQuery or CssSelectors) separated by '>'.</param>
@@ -76,6 +78,7 @@ namespace ShadowRoot.Digger
 
         /// <summary>
         /// Checks if the shadow root element exists or not.
+        /// Throws - 'WebDriverException' incase any shadow root element is not found when <param name="throwError"> is set to 'true'.
         /// </summary>
         /// <param name="webDriver">Selenium webdriver instance.</param>
         /// <param name="shadowRootSelector">Shadow root element selectors (probably jQuery or CssSelectors).</param>
@@ -112,6 +115,7 @@ namespace ShadowRoot.Digger
 
         /// <summary>
         /// Checks if the nested shadow root element hierarchy exists or not.
+        /// Throws - 'WebDriverException' incase any shadow root element is not found in the nested hierarchy when <param name="throwError"> is set to 'true'.
         /// </summary>
         /// <param name="webDriver">Selenium webdriver instance.</param>
         /// <param name="shadowRootSelectors">List of shadow root element selectors (probably jQuery or CssSelectors) separated by '>'.</param>

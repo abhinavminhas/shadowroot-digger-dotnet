@@ -17,12 +17,38 @@ namespace ShadowRootDigger.CORE.Tests
         private readonly string _basicTabCheckboxesIdentifier = "settings-checkbox[id*=\"CheckboxBasic\"]";
         private readonly string _buttonClearDataIdentifier = "#clearBrowsingDataConfirm";
         private readonly string _notExistsNestedShadowRootElement = "settings-ui > settings-main.main";
+        private readonly string _existsShadowRootElement = "settings-ui";
+        private readonly string _notExistsShadowRootElement = "not-exists";
+
+        [TestMethod]
+        [TestCategory("TESTS-DOTNETCORE")]
+        public void Test_GetShadowRootElement_ShadowRootElementExists()
+        {
+            WebDriver.Navigate().GoToUrl("https://www.google.com");
+            WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
+            var clearBrowsingTab = ShadowRootAssist.GetShadowRootElement(WebDriver, _existsShadowRootElement);
+            Assert.IsNotNull(clearBrowsingTab);
+        }
+
+        [TestMethod]
+        [TestCategory("TESTS-DOTNETCORE")]
+        public void Test_GetShadowRootElement_ShadowRootElementDoesNotExists()
+        {
+            var expectedErrorMessage = "GetShadowRootElement: Shadow root element for selector 'not-exists' Not Found.";
+            WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
+            try
+            {
+                ShadowRootAssist.GetShadowRootElement(WebDriver, _notExistsShadowRootElement);
+                Assert.Fail("No Exception Thrown.");
+            }
+            catch (AssertFailedException ex) { throw ex; }
+            catch (WebDriverException ex) { Assert.AreEqual(expectedErrorMessage, ex.Message); }
+        }
 
         [TestMethod]
         [TestCategory("TESTS-DOTNETCORE")]
         public void Test_GetNestedShadowRootElement_ClearChromeData()
         {
-            WebDriver.Navigate().GoToUrl("https://www.google.com");
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
             var clearBrowsingTab = ShadowRootAssist.GetNestedShadowRootElement(WebDriver, _tabRootElement);
             clearBrowsingTab.FindElements(By.CssSelector(_divTabIdentifier))
@@ -46,7 +72,6 @@ namespace ShadowRootDigger.CORE.Tests
         public void Test_GetNestedShadowRootElement_RootElementDoesNotExists()
         {
             var expectedErrorMessage = "GetNestedShadowRootElement: Nested shadow root element for selector 'settings-main.main' in DOM hierarchy 'settings-ui > settings-main.main' Not Found.";
-            WebDriver.Navigate().GoToUrl("https://www.google.com");
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
             try
             {
@@ -61,7 +86,6 @@ namespace ShadowRootDigger.CORE.Tests
         [TestCategory("TESTS-DOTNETCORE")]
         public void Test_IsNestedShadowRootElementPresent_NestedShadowRootExists()
         {
-            WebDriver.Navigate().GoToUrl("https://www.google.com");
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
             var exists = ShadowRootAssist.IsNestedShadowRootElementPresent(WebDriver, _tabRootElement);
             Assert.AreEqual(true, exists);
@@ -76,39 +100,12 @@ namespace ShadowRootDigger.CORE.Tests
         public void Test_IsNestedShadowRootElementPresent_NestedShadowRootNotExists()
         {
             var expectedErrorMessage = "IsNestedShadowRootElementPresent: Nested shadow root element for selector 'settings-main.main' in DOM hierarchy 'settings-ui > settings-main.main' Not Found.";
-            WebDriver.Navigate().GoToUrl("https://www.google.com");
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
             var exists = ShadowRootAssist.IsNestedShadowRootElementPresent(WebDriver, _notExistsNestedShadowRootElement);
             Assert.AreEqual(false, exists);
             try
             {
                 ShadowRootAssist.IsNestedShadowRootElementPresent(WebDriver, _notExistsNestedShadowRootElement, throwError: true);
-                Assert.Fail("No Exception Thrown.");
-            }
-            catch (AssertFailedException ex) { throw ex; }
-            catch (WebDriverException ex) { Assert.AreEqual(expectedErrorMessage, ex.Message); }
-        }
-
-        [TestMethod]
-        [TestCategory("TESTS-DOTNETCORE")]
-        public void Test_GetShadowRootElement()
-        {
-            WebDriver.Navigate().GoToUrl("https://www.google.com");
-            WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
-            var clearBrowsingTab = ShadowRootAssist.GetShadowRootElement(WebDriver, "settings-ui");
-            Assert.IsNotNull(clearBrowsingTab);
-        }
-
-        [TestMethod]
-        [TestCategory("TESTS-DOTNETCORE")]
-        public void Test_GetShadowRootElement_RootElementDoesNotExists()
-        {
-            var expectedErrorMessage = "GetShadowRootElement: Shadow root element for selector 'not-exists' Not Found.";
-            WebDriver.Navigate().GoToUrl("https://www.google.com");
-            WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
-            try
-            {
-                ShadowRootAssist.GetShadowRootElement(WebDriver, "not-exists");
                 Assert.Fail("No Exception Thrown.");
             }
             catch (AssertFailedException ex) { throw ex; }

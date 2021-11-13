@@ -19,9 +19,9 @@ namespace ShadowRoot.Digger
         /// <returns>Shadow root web element.</returns>
         public static IWebElement GetShadowRootElement(this IWebDriver webDriver, string shadowRootSelector, int timeInSeconds = 20, int pollingIntervalInMilliseconds = 2000)
         {
+            var shadowRootQuerySelector = "return document.querySelector('{0}').shadowRoot";
             var GlobalDriverImplicitWait = webDriver.Manage().Timeouts().ImplicitWait.Ticks;
             webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds);
-            var shadowRootQuerySelector = "return document.querySelector('{0}').shadowRoot";
             var shadowRootElement = string.Format(shadowRootQuerySelector, shadowRootSelector);
             try
             {
@@ -31,9 +31,13 @@ namespace ShadowRoot.Digger
                 };
                 webDriverWait.Until(item => (IWebElement)((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
             }
-            catch (WebDriverException) { throw new WebDriverException(string.Format("{0}: Shadow root element for selector '{1}' Not Found.", MethodBase.GetCurrentMethod().Name, shadowRootSelector)); }
-            var requiredShadowRoot = (IWebElement)((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
+            catch (WebDriverException)
+            {
+                webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(GlobalDriverImplicitWait);
+                throw new WebDriverException(string.Format("{0}: Shadow root element for selector '{1}' Not Found.", MethodBase.GetCurrentMethod().Name, shadowRootSelector));
+            }
             webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(GlobalDriverImplicitWait);
+            var requiredShadowRoot = (IWebElement)((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
             return requiredShadowRoot;
         }
 
@@ -48,8 +52,6 @@ namespace ShadowRoot.Digger
         /// <returns>Nested shadow root web element.</returns>
         public static IWebElement GetNestedShadowRootElement(this IWebDriver webDriver, string shadowRootSelectors, int timeInSeconds = 20, int pollingIntervalInMilliseconds = 2000)
         {
-            var GlobalDriverImplicitWait = webDriver.Manage().Timeouts().ImplicitWait.Ticks;
-            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds);
             var listShadowRootSelectors = shadowRootSelectors.Split('>')
                 .Select(p => p.Trim()).Where(p => !string.IsNullOrWhiteSpace(p));
             var shadowRootQuerySelector = ".querySelector('{0}').shadowRoot";
@@ -61,6 +63,8 @@ namespace ShadowRoot.Digger
                 var tempQueryString = string.Format(shadowRootQuerySelector, shadowRoot);
                 shadowRootQueryString += tempQueryString;
                 shadowRootElement = string.Format(documentReturn, shadowRootQueryString);
+                var GlobalDriverImplicitWait = webDriver.Manage().Timeouts().ImplicitWait.Ticks;
+                webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds);
                 try
                 {
                     var webDriverWait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeInSeconds))
@@ -69,10 +73,14 @@ namespace ShadowRoot.Digger
                     };
                     webDriverWait.Until(item => (IWebElement)((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
                 }
-                catch (WebDriverException) { throw new WebDriverException(string.Format("{0}: Nested shadow root element for selector '{1}' in DOM hierarchy '{2}' Not Found.", MethodBase.GetCurrentMethod().Name, shadowRoot, shadowRootSelectors)); }
+                catch (WebDriverException)
+                {
+                    webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(GlobalDriverImplicitWait);
+                    throw new WebDriverException(string.Format("{0}: Nested shadow root element for selector '{1}' in DOM hierarchy '{2}' Not Found.", MethodBase.GetCurrentMethod().Name, shadowRoot, shadowRootSelectors));
+                }
+                webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(GlobalDriverImplicitWait);
             }
             var requiredShadowRoot = (IWebElement)((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
-            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(GlobalDriverImplicitWait);
             return requiredShadowRoot;
         }
 
@@ -89,10 +97,10 @@ namespace ShadowRoot.Digger
         public static bool IsShadowRootElementPresent(this IWebDriver webDriver, string shadowRootSelector, bool throwError = false, int timeInSeconds = 20, int pollingIntervalInMilliseconds = 2000)
         {
             var isPresent = false;
-            var GlobalDriverImplicitWait = webDriver.Manage().Timeouts().ImplicitWait.Ticks;
-            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds);
             var shadowRootQuerySelector = "return document.querySelector('{0}').shadowRoot";
             var shadowRootElement = string.Format(shadowRootQuerySelector, shadowRootSelector);
+            var GlobalDriverImplicitWait = webDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds);
             try
             {
                 var webDriverWait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeInSeconds))
@@ -104,6 +112,7 @@ namespace ShadowRoot.Digger
             }
             catch (WebDriverException) 
             {
+                webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(GlobalDriverImplicitWait);
                 if (throwError)
                     throw new WebDriverException(string.Format("{0}: Shadow root element for selector '{1}' Not Found.", MethodBase.GetCurrentMethod().Name, shadowRootSelector));
                 else
@@ -126,8 +135,6 @@ namespace ShadowRoot.Digger
         public static bool IsNestedShadowRootElementPresent(this IWebDriver webDriver, string shadowRootSelectors, bool throwError = false, int timeInSeconds = 20, int pollingIntervalInMilliseconds = 2000)
         {
             var isPresent = false;
-            var GlobalDriverImplicitWait = webDriver.Manage().Timeouts().ImplicitWait.Ticks;
-            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds);
             var listShadowRootSelectors = shadowRootSelectors.Split('>')
                 .Select(p => p.Trim()).Where(p => !string.IsNullOrWhiteSpace(p));
             var shadowRootQuerySelector = ".querySelector('{0}').shadowRoot";
@@ -139,6 +146,8 @@ namespace ShadowRoot.Digger
                 var tempQueryString = string.Format(shadowRootQuerySelector, shadowRoot);
                 shadowRootQueryString += tempQueryString;
                 shadowRootElement = string.Format(documentReturn, shadowRootQueryString);
+                var GlobalDriverImplicitWait = webDriver.Manage().Timeouts().ImplicitWait.Ticks;
+                webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds);
                 try
                 {
                     var webDriverWait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeInSeconds))
@@ -150,11 +159,13 @@ namespace ShadowRoot.Digger
                 }
                 catch (WebDriverException) 
                 {
+                    webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(GlobalDriverImplicitWait);
                     if (throwError)
                         throw new WebDriverException(string.Format("{0}: Nested shadow root element for selector '{1}' in DOM hierarchy '{2}' Not Found.", MethodBase.GetCurrentMethod().Name, shadowRoot, shadowRootSelectors));
                     else
                         isPresent = false;
                 }
+                webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(GlobalDriverImplicitWait);
             }
             return isPresent;
         }

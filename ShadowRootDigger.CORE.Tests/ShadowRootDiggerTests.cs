@@ -24,7 +24,6 @@ namespace ShadowRootDigger.CORE.Tests
         [TestCategory("TESTS-DOTNETCORE")]
         public void Test_GetShadowRootElement_ShadowRootElementExists()
         {
-            WebDriver.Navigate().GoToUrl("https://www.google.com");
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
             var clearBrowsingTab = ShadowRootAssist.GetShadowRootElement(WebDriver, _existsShadowRootElement);
             Assert.IsNotNull(clearBrowsingTab);
@@ -43,6 +42,36 @@ namespace ShadowRootDigger.CORE.Tests
             }
             catch (AssertFailedException ex) { throw ex; }
             catch (WebDriverException ex) { Assert.AreEqual(expectedErrorMessage, ex.Message); }
+        }
+
+        [TestMethod]
+        [TestCategory("TESTS-DOTNETCORE")]
+        public void Test_GetShadowRootElement_ImplicitWaitManipulationCheck_Exists()
+        {
+            var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
+            ShadowRootAssist.GetShadowRootElement(WebDriver, _existsShadowRootElement);
+            var implicitWaitAfter = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, implicitWaitAfter);
+        }
+
+        [TestMethod]
+        [TestCategory("TESTS-DOTNETCORE")]
+        public void Test_GetShadowRootElement_ImplicitWaitManipulationCheck_NotExists()
+        {
+            var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
+            try
+            {
+                ShadowRootAssist.GetShadowRootElement(WebDriver, _notExistsShadowRootElement);
+                Assert.Fail("No Exception Thrown.");
+            }
+            catch (AssertFailedException ex) { throw ex; }
+            catch (WebDriverException)
+            {
+                var implicitWaitAfter = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+                Assert.AreEqual(implicitWaitBefore, implicitWaitAfter);
+            }
         }
 
         [TestMethod]
@@ -84,6 +113,36 @@ namespace ShadowRootDigger.CORE.Tests
 
         [TestMethod]
         [TestCategory("TESTS-DOTNETCORE")]
+        public void Test_GetNestedShadowRootElement_ImplicitWaitManipulationCheck_Exists()
+        {
+            var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
+            ShadowRootAssist.GetNestedShadowRootElement(WebDriver, _tabRootElement);
+            var implicitWaitAfter = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, implicitWaitAfter);
+        }
+
+        [TestMethod]
+        [TestCategory("TESTS-DOTNETCORE")]
+        public void Test_GetNestedShadowRootElement_ImplicitWaitManipulationCheck_NotExists()
+        {
+            var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
+            try
+            {
+                ShadowRootAssist.GetNestedShadowRootElement(WebDriver, _notExistsNestedShadowRootElement);
+                Assert.Fail("No Exception Thrown.");
+            }
+            catch (AssertFailedException ex) { throw ex; }
+            catch (WebDriverException)
+            {
+                var implicitWaitAfter = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+                Assert.AreEqual(implicitWaitBefore, implicitWaitAfter);
+            }
+        }
+
+        [TestMethod]
+        [TestCategory("TESTS-DOTNETCORE")]
         public void Test_IsShadowRootElementPresent_ShadowRootExists()
         {
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
@@ -106,6 +165,39 @@ namespace ShadowRootDigger.CORE.Tests
             }
             catch (AssertFailedException ex) { throw ex; }
             catch (WebDriverException ex) { Assert.AreEqual(expectedErrorMessage, ex.Message); }
+        }
+
+        [TestMethod]
+        [TestCategory("TESTS-DOTNETCORE")]
+        public void Test_IsShadowRootElementPresent_ImplicitWaitManipulationCheck_Exists()
+        {
+            var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
+            ShadowRootAssist.IsShadowRootElementPresent(WebDriver, _existsShadowRootElement);
+            var implicitWaitAfter = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, implicitWaitAfter);
+        }
+
+        [TestMethod]
+        [TestCategory("TESTS-DOTNETCORE")]
+        public void Test_IsShadowRootElementPresent_ImplicitWaitManipulationCheck_NotExists()
+        {
+            var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
+            ShadowRootAssist.IsShadowRootElementPresent(WebDriver, _notExistsShadowRootElement);
+            var implicitWaitAfter = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, implicitWaitAfter);
+            try
+            {
+                ShadowRootAssist.IsShadowRootElementPresent(WebDriver, _notExistsShadowRootElement, throwError: true);
+                Assert.Fail("No Exception Thrown.");
+            }
+            catch (AssertFailedException ex) { throw ex; }
+            catch (WebDriverException)
+            {
+                implicitWaitAfter = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+                Assert.AreEqual(implicitWaitBefore, implicitWaitAfter);
+            }
         }
 
         [TestMethod]
@@ -136,6 +228,39 @@ namespace ShadowRootDigger.CORE.Tests
             }
             catch (AssertFailedException ex) { throw ex; }
             catch (WebDriverException ex) { Assert.AreEqual(expectedErrorMessage, ex.Message); }
+        }
+
+        [TestMethod]
+        [TestCategory("TESTS-DOTNETCORE")]
+        public void Test_IsNestedShadowRootElementPresent_ImplicitWaitManipulationCheck_Exists()
+        {
+            var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
+            ShadowRootAssist.IsNestedShadowRootElementPresent(WebDriver, _tabRootElement);
+            var implicitWaitAfter = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, implicitWaitAfter);
+        }
+
+        [TestMethod]
+        [TestCategory("TESTS-DOTNETCORE")]
+        public void Test_IsNestedShadowRootElementPresent_ImplicitWaitManipulationCheck_NotExists()
+        {
+            var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
+            ShadowRootAssist.IsNestedShadowRootElementPresent(WebDriver, _notExistsNestedShadowRootElement);
+            var implicitWaitAfter = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, implicitWaitAfter);
+            try
+            {
+                ShadowRootAssist.IsNestedShadowRootElementPresent(WebDriver, _notExistsNestedShadowRootElement, throwError: true);
+                Assert.Fail("No Exception Thrown.");
+            }
+            catch (AssertFailedException ex) { throw ex; }
+            catch (WebDriverException)
+            {
+                implicitWaitAfter = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+                Assert.AreEqual(implicitWaitBefore, implicitWaitAfter);
+            }
         }
     }
 }

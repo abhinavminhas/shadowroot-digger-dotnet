@@ -83,7 +83,7 @@ namespace ShadowRootDigger.CORE.Tests
         }
 
         [TestMethod]
-        [TestCategory("TESTS-DOTNETFRAMEWORK")]
+        [TestCategory("TESTS-DOTNETCORE")]
         public void Test_IsShadowRootElementPresent_ShadowRootExists()
         {
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
@@ -92,7 +92,7 @@ namespace ShadowRootDigger.CORE.Tests
         }
 
         [TestMethod]
-        [TestCategory("TESTS-DOTNETFRAMEWORK")]
+        [TestCategory("TESTS-DOTNETCORE")]
         public void Test_IsShadowRootElementPresent_ShadowRootNotExists()
         {
             var expectedErrorMessage = "IsShadowRootElementPresent: Shadow root element for selector 'not-exists' Not Found.";

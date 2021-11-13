@@ -83,6 +83,32 @@ namespace ShadowRootDigger.CORE.Tests
         }
 
         [TestMethod]
+        [TestCategory("TESTS-DOTNETFRAMEWORK")]
+        public void Test_IsShadowRootElementPresent_ShadowRootExists()
+        {
+            WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
+            var exists = ShadowRootAssist.IsShadowRootElementPresent(WebDriver, _existsShadowRootElement);
+            Assert.AreEqual(true, exists);
+        }
+
+        [TestMethod]
+        [TestCategory("TESTS-DOTNETFRAMEWORK")]
+        public void Test_IsShadowRootElementPresent_ShadowRootNotExists()
+        {
+            var expectedErrorMessage = "IsNestedShadowRootElementPresent: Nested shadow root element for selector 'not-exists' in DOM hierarchy 'not-exists' Not Found.";
+            WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
+            var exists = ShadowRootAssist.IsShadowRootElementPresent(WebDriver, _notExistsShadowRootElement);
+            Assert.AreEqual(false, exists);
+            try
+            {
+                ShadowRootAssist.IsNestedShadowRootElementPresent(WebDriver, _notExistsShadowRootElement, throwError: true);
+                Assert.Fail("No Exception Thrown.");
+            }
+            catch (AssertFailedException ex) { throw ex; }
+            catch (WebDriverException ex) { Assert.AreEqual(expectedErrorMessage, ex.Message); }
+        }
+
+        [TestMethod]
         [TestCategory("TESTS-DOTNETCORE")]
         public void Test_IsNestedShadowRootElementPresent_NestedShadowRootExists()
         {

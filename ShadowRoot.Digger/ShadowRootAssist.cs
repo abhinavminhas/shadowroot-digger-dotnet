@@ -75,6 +75,42 @@ namespace ShadowRoot.Digger
         }
 
         /// <summary>
+        /// Checks if the shadow root element exists or not.
+        /// </summary>
+        /// <param name="webDriver">Selenium webdriver instance.</param>
+        /// <param name="shadowRootSelector">Shadow root element selectors (probably jQuery or CssSelectors).</param>
+        /// <param name="throwError">Boolean value to throw error if nested shadow root element hierarchy does not exists. Default - 'false'.</param>
+        /// <param name="timeInSeconds">Wait time in seconds. Default - '20 seconds'.</param>
+        /// <param name="pollingIntervalInMilliseconds">Polling interval time in milliseconds. Default - '2000 milliseconds'.</param>
+        /// <returns>Boolean value shadow root element exists or not.</returns>
+        public static bool IsShadowRootElementPresent(this IWebDriver webDriver, string shadowRootSelector, bool throwError = false, int timeInSeconds = 20, int pollingIntervalInMilliseconds = 2000)
+        {
+            var isPresent = false;
+            var GlobalDriverImplicitWait = webDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds);
+            var shadowRootQuerySelector = "return document.querySelector('{0}').shadowRoot";
+            var shadowRootElement = string.Format(shadowRootQuerySelector, shadowRootSelector);
+            try
+            {
+                var webDriverWait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeInSeconds))
+                {
+                    PollingInterval = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds)
+                };
+                webDriverWait.Until(item => (IWebElement)((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
+                isPresent = true;
+            }
+            catch (WebDriverException) 
+            {
+                if (throwError)
+                    throw new WebDriverException(string.Format("{0}: Shadow root element for selector '{1}' Not Found.", MethodBase.GetCurrentMethod().Name, shadowRootSelector));
+                else
+                    isPresent = false;
+            }
+            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(GlobalDriverImplicitWait);
+            return isPresent;
+        }
+
+        /// <summary>
         /// Checks if the nested shadow root element hierarchy exists or not.
         /// </summary>
         /// <param name="webDriver">Selenium webdriver instance.</param>

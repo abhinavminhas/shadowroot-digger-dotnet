@@ -16,7 +16,7 @@ namespace ShadowRootDigger.NET.Tests
         private readonly string _selectTimeRangeIdentifier = "select#dropdownMenu";
         private readonly string _basicTabCheckboxesIdentifier = "settings-checkbox[id*=\"CheckboxBasic\"]";
         private readonly string _buttonClearDataIdentifier = "#clearBrowsingDataConfirm";
-        private readonly string _notexistsRootElement = "settings-ui > settings-main.main";
+        private readonly string _notExistsNestedShadowRootElement = "settings-ui > settings-main.main";
 
         [TestMethod]
         [TestCategory("TESTS-DOTNETFRAMEWORK")]
@@ -50,7 +50,7 @@ namespace ShadowRootDigger.NET.Tests
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
             try
             {
-                ShadowRootAssist.GetNestedShadowRootElement(WebDriver, _notexistsRootElement);
+                ShadowRootAssist.GetNestedShadowRootElement(WebDriver, _notExistsNestedShadowRootElement);
                 Assert.Fail("No Exception Thrown.");
             }
             catch (AssertFailedException ex) { throw ex; }
@@ -78,11 +78,11 @@ namespace ShadowRootDigger.NET.Tests
             var expectedErrorMessage = "IsNestedShadowRootElementPresent: Nested shadow root element for selector 'settings-main.main' in DOM hierarchy 'settings-ui > settings-main.main' Not Found.";
             WebDriver.Navigate().GoToUrl("https://www.google.com");
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
-            var exists = ShadowRootAssist.IsNestedShadowRootElementPresent(WebDriver, _notexistsRootElement);
+            var exists = ShadowRootAssist.IsNestedShadowRootElementPresent(WebDriver, _notExistsNestedShadowRootElement);
             Assert.AreEqual(false, exists);
             try
             {
-                ShadowRootAssist.IsNestedShadowRootElementPresent(WebDriver, _notexistsRootElement, throwError: true);
+                ShadowRootAssist.IsNestedShadowRootElementPresent(WebDriver, _notExistsNestedShadowRootElement, throwError: true);
                 Assert.Fail("No Exception Thrown.");
             }
             catch (AssertFailedException ex) { throw ex; }

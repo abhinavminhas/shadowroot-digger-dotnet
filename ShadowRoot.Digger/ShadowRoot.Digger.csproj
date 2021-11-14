@@ -2,10 +2,25 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Abhinav Minhas</Authors>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/abhinavminhas/shadowroot-digger</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/abhinavminhas/shadowroot-digger</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <Description>The solution combines the power of Document Query Selector API with Selenium to grab shadow root DOM trees and interact with any elements encapsulated within it.</Description>
+    <PackageReleaseNotes>Document Query Selector API with Selenium to grab shadow root DOM trees and interact with any elements encapsulated within it.</PackageReleaseNotes>
+    <PackageTags>Shadow DOM, Shadow Root, Selenium, Query Selector, DOM</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

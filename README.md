@@ -34,3 +34,5 @@ The solution is built on .NetStandard 2.0
     ShadowRootAssist.IsNestedShadowRootElementPresent()
     ```
     **NOTE:** *Use **[jQuery Selectors](https://www.w3schools.com/jquery/jquery_ref_selectors.asp)** or **[CSS Selectors](https://www.w3schools.com/cssref/css_selectors.asp)** for shadow root identifications.*
+
+**NOTE:** *Google Chrome & shadow DOM in Chrome settings have been used for testing the solution.*

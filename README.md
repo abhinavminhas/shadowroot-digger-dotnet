@@ -9,7 +9,7 @@ One of the important aspect of web components is encapsulation and [Shadow DOM A
 
 ## Download
 The package is available and can be downloaded using [nuget.org](https://www.nuget.org/) package manager.  
-- Package Name - [ShadowRoot.Digger]().
+- Package Name - [ShadowRoot.Digger](https://www.nuget.org/packages/ShadowRoot.Digger/).
 
 ## Features
 

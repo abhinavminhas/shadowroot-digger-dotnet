@@ -1,0 +1,31 @@
+name: Publish Nuget Package
+
+env:
+    NUGET_PACKAGE_NAME_VERSION: "ShadowRoot.Digger.1.0.0.nupkg"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ windows-latest ]
+        dotnet-version: [ '3.1.x' ]
+    
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      
+    - name: Dotnet Version (${{ matrix.dotnet-version }})
+      uses: actions/setup-dotnet@v1
+      with:
+          dotnet-version: '3.1.x'
+          
+    - name: Create Package
+      run: dotnet pack --configuration=Release ShadowRoot.Digger/ShadowRoot.Digger.csproj
+      
+    - name: Publish Nuget Package
+      run: dotnet nuget push ShadowRoot.Digger/bin/Release/${{ env.NUGET_PACKAGE_NAME_VERSION }} -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+      

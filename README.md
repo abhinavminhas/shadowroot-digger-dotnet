@@ -26,7 +26,7 @@ The solution is built on .NetStandard 2.0
     ShadowRootAssist.GetShadowRootElement()
     ShadowRootAssist.GetNestedShadowRootElement()
     ```
-    The returned shadow root element from above extension methods can be used to find element/s encapsulated within it. Check the solution tests for more information.  
+    The returned shadow root element from above extension methods can be used to find element/s encapsulated within it.  
     **NOTE:** *Use **[jQuery Selectors](https://www.w3schools.com/jquery/jquery_ref_selectors.asp)** or **[CSS Selectors](https://www.w3schools.com/cssref/css_selectors.asp)** for shadow root identifications.*
 3. Use below extension methods for checking if shadow root or nested shadow root exists or not.  
     ```
@@ -35,4 +35,5 @@ The solution is built on .NetStandard 2.0
     ```
     **NOTE:** *Use **[jQuery Selectors](https://www.w3schools.com/jquery/jquery_ref_selectors.asp)** or **[CSS Selectors](https://www.w3schools.com/cssref/css_selectors.asp)** for shadow root identifications.*
 
+ Check the solution tests for more information.  
 **NOTE:** *Google Chrome & shadow DOM in Chrome settings have been used for testing the solution.*

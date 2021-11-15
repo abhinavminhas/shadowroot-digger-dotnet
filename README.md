@@ -12,12 +12,30 @@ The package is available and can be downloaded using [nuget.org](https://www.nug
 - Package Name - [ShadowRoot.Digger](https://www.nuget.org/packages/ShadowRoot.Digger/).
 
 ## Features
-
 1. Returns shadow root or nested shadow root from DOM.
 2. Checks if shadow root or nested shadow root is present or not in the DOM.
 
 ## .NET Supported Versions
-
 The solution is built on .NetStandard 2.0  
+<img src="https://user-images.githubusercontent.com/17473202/141665862-0e5e1c0e-e84f-42bf-befb-267e722e9d60.png" />  
 
-<img src="https://user-images.githubusercontent.com/17473202/137575806-fdebc1ff-4741-4ada-8974-0459c6e27830.png" />
+## Usage Guidelines
+1. Install the nuget package [ShadowRoot.Digger](https://www.nuget.org/packages/ShadowRoot.Digger/).  
+2. Use below extension methods to get shadow root or nested shadow root.  
+   Requried parameters - webdriver instance & shadow root selector identifier/s.
+    ```
+    ShadowRootAssist.GetShadowRootElement()
+    ShadowRootAssist.GetNestedShadowRootElement()
+    ```
+    The returned shadow root element from above extension methods can be used to find element/s encapsulated within it.  
+    **NOTE:** *Use **[jQuery Selectors](https://www.w3schools.com/jquery/jquery_ref_selectors.asp)** or **[CSS Selectors](https://www.w3schools.com/cssref/css_selectors.asp)** for shadow root identifications.*
+3. Use below extension methods for checking if shadow root or nested shadow root exists or not.  
+   Requried parameters - webdriver instance & shadow root selector identifier/s.
+    ```
+    ShadowRootAssist.IsShadowRootElementPresent()
+    ShadowRootAssist.IsNestedShadowRootElementPresent()
+    ```
+    **NOTE:** *Use **[jQuery Selectors](https://www.w3schools.com/jquery/jquery_ref_selectors.asp)** or **[CSS Selectors](https://www.w3schools.com/cssref/css_selectors.asp)** for shadow root identifications.*
+
+ Check the solution tests for more information.  
+**NOTE:** *Google Chrome & shadow DOM in Chrome settings have been used for testing the solution.*

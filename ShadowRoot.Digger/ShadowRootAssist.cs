@@ -29,7 +29,9 @@ namespace ShadowRoot.Digger
                 {
                     PollingInterval = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds)
                 };
-                webDriverWait.Until(item => (IWebElement)((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
+                webDriverWait.Until(item => ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
+                var returnObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
+                webDriverWait.Until(item => returnObject = typeof(IWebElement));
             }
             catch (WebDriverException)
             {
@@ -71,7 +73,9 @@ namespace ShadowRoot.Digger
                     {
                         PollingInterval = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds)
                     };
-                    webDriverWait.Until(item => (IWebElement)((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
+                    webDriverWait.Until(item => ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
+                    var returnObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
+                    webDriverWait.Until(item => returnObject = typeof(IWebElement));
                 }
                 catch (WebDriverException)
                 {
@@ -107,7 +111,9 @@ namespace ShadowRoot.Digger
                 {
                     PollingInterval = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds)
                 };
-                webDriverWait.Until(item => (IWebElement)((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
+                webDriverWait.Until(item => ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
+                var returnObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
+                webDriverWait.Until(item => returnObject = typeof(IWebElement));
                 isPresent = true;
             }
             catch (WebDriverException) 
@@ -154,7 +160,9 @@ namespace ShadowRoot.Digger
                     {
                         PollingInterval = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds)
                     };
-                    webDriverWait.Until(item => (IWebElement)((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
+                    webDriverWait.Until(item => ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
+                    var returnObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
+                    webDriverWait.Until(item => returnObject = typeof(IWebElement));
                     isPresent = true;
                 }
                 catch (WebDriverException) 

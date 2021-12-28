@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -33,8 +34,13 @@ namespace ShadowRoot.Digger
                 };
                 webDriverWait.Until(item => ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
                 var returnedObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
-                webDriverWait.Until(item => returnedObject.GetType().Equals(typeof(RemoteWebElement)) == true);
-                requiredShadowRoot = (IWebElement)returnedObject;
+                if (returnedObject is Dictionary<string, object> dictionary && dictionary.Keys.FirstOrDefault().Contains("shadow"))
+                {
+                    var remoteWebElement = new RemoteWebElement((RemoteWebDriver)webDriver, (string)dictionary.Values.First());
+                    requiredShadowRoot = remoteWebElement;
+                }
+                else
+                    requiredShadowRoot = (IWebElement)returnedObject;
             }
             catch (WebDriverException)
             {
@@ -78,8 +84,13 @@ namespace ShadowRoot.Digger
                     };
                     webDriverWait.Until(item => ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
                     var returnedObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
-                    webDriverWait.Until(item => returnedObject.GetType().Equals(typeof(RemoteWebElement)) == true);
-                    requiredShadowRoot = (IWebElement)returnedObject;
+                    if (returnedObject is Dictionary<string, object> dictionary && dictionary.Keys.FirstOrDefault().Contains("shadow"))
+                    {
+                        var remoteWebElement = new RemoteWebElement((RemoteWebDriver)webDriver, (string)dictionary.Values.First());
+                        requiredShadowRoot = remoteWebElement;
+                    }
+                    else
+                        requiredShadowRoot = (IWebElement)returnedObject;
                 }
                 catch (WebDriverException)
                 {
@@ -116,10 +127,15 @@ namespace ShadowRoot.Digger
                 };
                 webDriverWait.Until(item => ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
                 var returnedObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
-                webDriverWait.Until(item => returnedObject.GetType().Equals(typeof(RemoteWebElement)) == true);
-                isPresent = true;
+                if (returnedObject is Dictionary<string, object> dictionary && dictionary.Keys.FirstOrDefault().Contains("shadow"))
+                {
+                    var remoteWebElement = new RemoteWebElement((RemoteWebDriver)webDriver, (string)dictionary.Values.First());
+                    isPresent = true;
+                }
+                else
+                    isPresent = true;
             }
-            catch (WebDriverException) 
+            catch (WebDriverException)
             {
                 webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(GlobalDriverImplicitWait);
                 if (throwError)
@@ -165,10 +181,15 @@ namespace ShadowRoot.Digger
                     };
                     webDriverWait.Until(item => ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
                     var returnedObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
-                    webDriverWait.Until(item => returnedObject.GetType().Equals(typeof(RemoteWebElement)) == true);
-                    isPresent = true;
+                    if (returnedObject is Dictionary<string, object> dictionary && dictionary.Keys.FirstOrDefault().Contains("shadow"))
+                    {
+                        var remoteWebElement = new RemoteWebElement((RemoteWebDriver)webDriver, (string)dictionary.Values.First());
+                        isPresent = true;
+                    }
+                    else
+                        isPresent = true;
                 }
-                catch (WebDriverException) 
+                catch (WebDriverException)
                 {
                     webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(GlobalDriverImplicitWait);
                     if (throwError)

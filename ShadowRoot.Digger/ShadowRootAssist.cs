@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace ShadowRoot.Digger
         /// <returns>Shadow root web element.</returns>
         public static IWebElement GetShadowRootElement(this IWebDriver webDriver, string shadowRootSelector, int timeInSeconds = 20, int pollingIntervalInMilliseconds = 2000)
         {
+            IWebElement requiredShadowRoot = null;
             var shadowRootQuerySelector = "return document.querySelector('{0}').shadowRoot";
             var GlobalDriverImplicitWait = webDriver.Manage().Timeouts().ImplicitWait.Ticks;
             webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds);
@@ -30,8 +32,9 @@ namespace ShadowRoot.Digger
                     PollingInterval = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds)
                 };
                 webDriverWait.Until(item => ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
-                var returnObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
-                webDriverWait.Until(item => returnObject = typeof(IWebElement));
+                var returnedObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
+                webDriverWait.Until(item => returnedObject.GetType().Equals(typeof(RemoteWebElement)) == true);
+                requiredShadowRoot = (IWebElement)returnedObject;
             }
             catch (WebDriverException)
             {
@@ -39,7 +42,6 @@ namespace ShadowRoot.Digger
                 throw new WebDriverException(string.Format("{0}: Shadow root element for selector '{1}' Not Found.", MethodBase.GetCurrentMethod().Name, shadowRootSelector));
             }
             webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(GlobalDriverImplicitWait);
-            var requiredShadowRoot = (IWebElement)((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
             return requiredShadowRoot;
         }
 
@@ -54,6 +56,7 @@ namespace ShadowRoot.Digger
         /// <returns>Nested shadow root web element.</returns>
         public static IWebElement GetNestedShadowRootElement(this IWebDriver webDriver, string shadowRootSelectors, int timeInSeconds = 20, int pollingIntervalInMilliseconds = 2000)
         {
+            IWebElement requiredShadowRoot = null;
             var listShadowRootSelectors = shadowRootSelectors.Split('>')
                 .Select(p => p.Trim()).Where(p => !string.IsNullOrWhiteSpace(p));
             var shadowRootQuerySelector = ".querySelector('{0}').shadowRoot";
@@ -74,8 +77,9 @@ namespace ShadowRoot.Digger
                         PollingInterval = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds)
                     };
                     webDriverWait.Until(item => ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
-                    var returnObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
-                    webDriverWait.Until(item => returnObject = typeof(IWebElement));
+                    var returnedObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
+                    webDriverWait.Until(item => returnedObject.GetType().Equals(typeof(RemoteWebElement)) == true);
+                    requiredShadowRoot = (IWebElement)returnedObject;
                 }
                 catch (WebDriverException)
                 {
@@ -84,7 +88,6 @@ namespace ShadowRoot.Digger
                 }
                 webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(GlobalDriverImplicitWait);
             }
-            var requiredShadowRoot = (IWebElement)((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
             return requiredShadowRoot;
         }
 
@@ -112,8 +115,8 @@ namespace ShadowRoot.Digger
                     PollingInterval = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds)
                 };
                 webDriverWait.Until(item => ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
-                var returnObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
-                webDriverWait.Until(item => returnObject = typeof(IWebElement));
+                var returnedObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
+                webDriverWait.Until(item => returnedObject.GetType().Equals(typeof(RemoteWebElement)) == true);
                 isPresent = true;
             }
             catch (WebDriverException) 
@@ -161,8 +164,8 @@ namespace ShadowRoot.Digger
                         PollingInterval = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds)
                     };
                     webDriverWait.Until(item => ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
-                    var returnObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
-                    webDriverWait.Until(item => returnObject = typeof(IWebElement));
+                    var returnedObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
+                    webDriverWait.Until(item => returnedObject.GetType().Equals(typeof(RemoteWebElement)) == true);
                     isPresent = true;
                 }
                 catch (WebDriverException) 

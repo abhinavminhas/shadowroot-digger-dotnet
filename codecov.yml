@@ -1,0 +1,3 @@
+coverage:
+  target: 90%
+  threshold: 10%

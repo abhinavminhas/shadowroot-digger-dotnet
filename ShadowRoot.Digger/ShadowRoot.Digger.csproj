@@ -8,8 +8,22 @@
     <RepositoryUrl>https://github.com/abhinavminhas/shadowroot-digger</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <Description>The solution combines the power of Document Query Selector API with Selenium to grab shadow root DOM trees and interact with any elements encapsulated within it.</Description>
-    <PackageReleaseNotes>Document Query Selector API with Selenium to grab shadow root DOM trees and interact with any elements encapsulated within it.</PackageReleaseNotes>
+    <PackageReleaseNotes>Fix for Selenium javascript executor function returning dictionary object instead of web element while keeping backward compatibility where older chromedriver versions still return web element. The issue has surfaced due to the fix of below issue in chromedriver by chromium.org.
+
+ChromeDriver Release Notes:
+https://chromedriver.storage.googleapis.com/96.0.4664.18/notes.txt
+https://chromedriver.storage.googleapis.com/96.0.4664.35/notes.txt
+https://chromedriver.storage.googleapis.com/96.0.4664.45/notes.txt
+
+ChromeDriver Resolved Issue Id:
+3445
+
+ChromeDriver Resolved Issue Details:
+Resolved issue 3445: Impossible to access elements in iframe inside a shadow root [Pri-3]
+
+https://bugs.chromium.org/p/chromedriver/issues/detail?id=3445&amp;q=3445&amp;can=2</PackageReleaseNotes>
     <PackageTags>Shadow DOM, Shadow Root, Selenium, Query Selector, DOM</PackageTags>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

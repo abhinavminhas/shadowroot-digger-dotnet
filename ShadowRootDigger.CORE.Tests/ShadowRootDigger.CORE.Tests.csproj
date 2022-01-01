@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -24,5 +24,13 @@
   <ItemGroup>
     <ProjectReference Include="..\ShadowRoot.Digger\ShadowRoot.Digger.csproj" />
   </ItemGroup>
+  
+  <!-- Creates and copies required App.config to output folder.  -->
+  <Target Name="CopyAppConfig" AfterTargets="Build" DependsOnTargets="Build">
+    <CreateItem Include="$(OutputPath)$(AssemblyName).dll.config">
+      <Output TaskParameter="Include" ItemName="FilesToCopy"/>
+    </CreateItem>
+    <Copy SourceFiles="@(FilesToCopy)" DestinationFiles="$(OutputPath)testhost.dll.config" />
+  </Target>
 
 </Project>

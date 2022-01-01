@@ -80,8 +80,20 @@ namespace ShadowRootDigger.NET.Tests
         {
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
             var clearBrowsingTab = ShadowRootAssist.GetNestedShadowRootElement(WebDriver, _tabRootElement);
-            clearBrowsingTab.FindElements(By.CssSelector(_divTabIdentifier))
-                .FirstOrDefault(item => item.Text == "Basic").Click();
+            Retry:
+            int count = 0;
+            var isReady = clearBrowsingTab.FindElements(By.CssSelector(_divTabIdentifier))
+                .FirstOrDefault(item => item.Text == "Basic" && item.Displayed == true && item.Enabled == true);
+            if (isReady == null)
+            {
+                count++;
+                if (count > 1)
+                    clearBrowsingTab.FindElements(By.CssSelector(_divTabIdentifier)).FirstOrDefault(item => item.Text == "Basic").Click();
+                else
+                    goto Retry;
+            }
+            else
+                clearBrowsingTab.FindElements(By.CssSelector(_divTabIdentifier)).FirstOrDefault(item => item.Text == "Basic").Click();
             var settingsDropdownMenu = ShadowRootAssist.GetNestedShadowRootElement(WebDriver, _settingsDropdownMenuRootElement);
             var timeRangeSelect = settingsDropdownMenu.FindElement(By.CssSelector(_selectTimeRangeIdentifier));
             new SelectElement(timeRangeSelect).SelectByText("Last hour");

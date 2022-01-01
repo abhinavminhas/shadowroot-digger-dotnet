@@ -1,7 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Remote;
 using System;
+using System.Configuration;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 
@@ -22,7 +24,10 @@ namespace ShadowRootDigger.NET.Tests
             chromeOptions.AddArguments("--disable-notifications");
             chromeOptions.AddArgument("--no-sandbox");
             chromeOptions.AddArgument("--disable-dev-shm-usage");
-            WebDriver = new ChromeDriver(chromeOptions);
+            if (ConfigurationManager.AppSettings["UseDocker"].ToLower().Equals("true"))
+                WebDriver = new RemoteWebDriver(new Uri("http://localhost:4444/wd/hub/"), chromeOptions);
+            else
+                WebDriver = new ChromeDriver(chromeOptions);
             WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(40);
             WebDriver.Manage().Window.Maximize();
         }

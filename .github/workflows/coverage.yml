@@ -32,7 +32,14 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: ${{ matrix.dotnet-version }}
-        
+
+    - name: Find And Replace Values (App.config)
+      if: ${{ matrix.dotnet-version == '3.1.x' }}
+      uses: datamonsters/replace-action@v2
+      with:
+        files: ${{ github.workspace }}/ShadowRootDigger.CORE.Tests/App.config
+        replacements: '__UseDocker__=true'
+
     - name: Build
       run: dotnet build ShadowRootDigger.CORE.Tests/ShadowRootDigger.CORE.Tests.csproj --configuration Release
     

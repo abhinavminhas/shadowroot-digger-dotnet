@@ -2,7 +2,7 @@
 <RunSettings>
   <MSTest>
     <Parallelize>
-      <Workers>16</Workers>
+      <Workers>8</Workers>
       <Scope>MethodLevel</Scope>
     </Parallelize>
   </MSTest>

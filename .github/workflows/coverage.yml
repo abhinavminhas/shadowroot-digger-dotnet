@@ -1,5 +1,10 @@
 name: Code Coverage
 
+env:
+    SELENUM_HUB_TAG: "4.1.1-20211217"
+    CHROME_NODE_TAG_1: "95.0-chromedriver-95.0"
+    CHROME_NODE_TAG_2: "96.0-chromedriver-96.0"
+
 on:
   push:
     branches: [ main, dev ]
@@ -14,7 +19,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ windows-latest ]
+        os: [ ubuntu-latest ]
         dotnet-version: [ '3.1.x' ]
         
     steps:
@@ -30,11 +35,68 @@ jobs:
         
     - name: Build
       run: dotnet build ShadowRootDigger.CORE.Tests/ShadowRootDigger.CORE.Tests.csproj --configuration Release
-        
-    - name: Test
-      if: ${{ matrix.dotnet-version == '3.1.x' }}
-      run: dotnet test --no-build --verbosity normal --configuration Release --settings:Test.runsettings --filter TestCategory=TESTS-DOTNETCORE /p:CollectCoverage=true /p:CoverletOutputFormat=lcov
     
+    - name: Find And Replace Values (Chrome Node Tag 1)
+      if: ${{ matrix.dotnet-version == '3.1.x' }}
+      uses: datamonsters/replace-action@v2
+      with:
+        files: docker-compose.yml
+        replacements: '__CHROME-NODE-TAG__=${{ env.CHROME_NODE_TAG_1 }},__CHROME-NODE-TAG__=${{ env.CHROME_NODE_TAG_1 }}'
+
+    - name: Find And Replace Values (Selenium Hub Tag)
+      if: ${{ matrix.dotnet-version == '3.1.x' }}
+      uses: datamonsters/replace-action@v2
+      with:
+        files: docker-compose.yml
+        replacements: '__SELENIUM-HUB-TAG__=${{ env.SELENUM_HUB_TAG }},__SELENIUM-HUB-TAG__=${{ env.SELENUM_HUB_TAG }}'
+      
+    - name: Create Selenium Grid (Chrome-ChromeDriver-v95)
+      run: docker-compose -f docker-compose.yml up -d
+    
+    - name: Sleep (10 Seconds)
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '10s'
+
+    - name: Test (Chrome-ChromeDriver-v95)
+      if: ${{ matrix.dotnet-version == '3.1.x' }}
+      run: dotnet test --no-build --verbosity normal --configuration Release --settings:Test.runsettings --filter TestCategory=TESTS-DOTNETCORE /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=coverage-1
+    
+    - name: Tear Down Selenium Grid (Chrome-ChromeDriver-v95)
+      run: |
+        docker-compose -f docker-compose.yml stop
+        docker-compose -f docker-compose.yml down
+    
+    - name: Upload Coverage To Codecov
+      uses: codecov/codecov-action@v2
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        directory: ShadowRootDigger.CORE.Tests/
+
+    - name: Find And Replace Values (Chrome Node Tag 2)
+      if: ${{ matrix.dotnet-version == '3.1.x' }}
+      uses: datamonsters/replace-action@v2
+      with:
+        files: docker-compose.yml
+        replacements: '${{ env.CHROME_NODE_TAG_1 }}=${{ env.CHROME_NODE_TAG_2 }},${{ env.CHROME_NODE_TAG_1 }}=${{ env.CHROME_NODE_TAG_2 }}'
+      
+    - name: Create Selenium Grid (Chrome-ChromeDriver-v96)
+      run: docker-compose -f docker-compose.yml up -d
+
+    - name: Sleep (10 Seconds)
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '10s'
+        
+    - name: Test (Chrome-ChromeDriver-v96)
+      if: ${{ matrix.dotnet-version == '3.1.x' }}
+      run: dotnet test --no-build --verbosity normal --configuration Release --settings:Test.runsettings --filter TestCategory=TESTS-DOTNETCORE /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=coverage-2
+    
+    - name: Tear Down Selenium Grid (Chrome-ChromeDriver-v96)
+      run: |
+        docker-compose -f docker-compose.yml stop
+        docker-compose -f docker-compose.yml down
+
     - name: Upload Coverage To Codecov
       uses: codecov/codecov-action@v2
       with:

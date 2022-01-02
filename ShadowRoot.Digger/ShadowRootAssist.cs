@@ -134,7 +134,7 @@ namespace ShadowRoot.Digger
                 }
                 else
                 {
-                    webDriverWait.Until(item => (IWebElement)returnedObject != null && returnedObject.GetType().Equals(typeof(RemoteWebElement)) == true);
+                    webDriverWait.Until(item => (IWebElement)returnedObject != null & returnedObject.GetType().Equals(typeof(RemoteWebElement)) == true);
                     isPresent = true;
                 }
             }
@@ -191,7 +191,7 @@ namespace ShadowRoot.Digger
                     }
                     else
                     {
-                        webDriverWait.Until(item => (IWebElement)returnedObject != null && returnedObject.GetType().Equals(typeof(RemoteWebElement)) == true);
+                        webDriverWait.Until(item => (IWebElement)returnedObject != null & returnedObject.GetType().Equals(typeof(RemoteWebElement)) == true);
                         isPresent = true;
                     }
                 }

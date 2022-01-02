@@ -39,3 +39,12 @@ The solution is built on .NetStandard 2.0
 
  Check the solution tests for more information.  
 **NOTE:** *Google Chrome & shadow DOM in Chrome settings have been used for testing the solution.*
+
+## Verified Versions
+   | Chrome | ChromeDriver |
+   | ----------- | ----------- |
+   | 92.0.4515.131 | 92.0.4515.107 |
+   | 93.0.4577.82 | 93.0.4577.63 |
+   | 94.0.4606.81 | 94.0.4606.61 |
+   | 95.0.4638.69 | 95.0.4638.54 |
+   | 96.0.4664.110 | 96.0.4664.45 |

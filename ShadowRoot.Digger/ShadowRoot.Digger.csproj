@@ -4,15 +4,20 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Abhinav Minhas</Authors>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageProjectUrl>https://github.com/abhinavminhas/shadowroot-digger</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/abhinavminhas/shadowroot-digger</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/abhinavminhas/shadowroot-digger-dotnet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/abhinavminhas/shadowroot-digger-dotnet</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <Description>The solution combines the power of Document Query Selector API with Selenium to grab shadow root DOM trees and interact with any elements encapsulated within it.</Description>
-    <PackageReleaseNotes>Minor Improvement
-1. Wait and check returned object from Selenium javascript executor function is of type web element for IsShadowRootElementPresent() &amp; IsNestedShadowRootElementPresent() methods where older chromedriver versions return web element instead of dictionary object.
-</PackageReleaseNotes>
-    <PackageTags>Shadow DOM, Shadow Root, Selenium, Query Selector, DOM</PackageTags>
-    <Version>1.0.2</Version>
+    <Description>The solution combines the power of Document Query Selector API with Selenium to grab shadow root DOM trees and interact with any elements encapsulated within it.
+
+Features:
+1. Returns shadow root or nested shadow root from DOM.
+2. Checks if shadow root or nested shadow root is present or not in the DOM.
+
+Solution Version:
+.NETStandard 2.0</Description>
+    <PackageReleaseNotes>1. Nuget package documentation and repo link update.</PackageReleaseNotes>
+    <PackageTags>ShadowDOM, ShadowRoot, Selenium, QuerySelector, DOM</PackageTags>
+    <Version>1.0.3</Version>
   </PropertyGroup>
 
   <ItemGroup>

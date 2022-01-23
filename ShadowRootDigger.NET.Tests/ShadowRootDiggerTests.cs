@@ -9,6 +9,9 @@ namespace ShadowRootDigger.NET.Tests
     [TestClass]
     public class ShadowRootDiggerTests : TestBase
     {
+
+        #region 'Chrome Settings' Web Controls
+
         private readonly string _tabRootElement = "body settings-ui > div#container settings-main#main > settings-basic-page.cr-centered-card-container > settings-privacy-page > settings-clear-browsing-data-dialog > cr-tabs[role=\"tablist\"]";
         private readonly string _clearBrowsingDataDialogRootElement = "settings-ui > settings-main#main > settings-basic-page.cr-centered-card-container > settings-privacy-page > settings-clear-browsing-data-dialog";
         private readonly string _settingsDropdownMenuRootElement = "settings-ui > settings-main#main > settings-basic-page.cr-centered-card-container > settings-privacy-page > settings-clear-browsing-data-dialog > settings-dropdown-menu#clearFromBasic";
@@ -20,9 +23,23 @@ namespace ShadowRootDigger.NET.Tests
         private readonly string _existsShadowRootElement = "settings-ui";
         private readonly string _notExistsShadowRootElement = "not-exists";
 
+        #endregion
+
+        #region 'Shadow DOM HTML' Web Controls
+
+        private readonly string _shadowHostElement = "#shadow_host";
+        private readonly string _notExistsShadowHostElement = "#non_host";
+        private readonly string _nestedShadowHostElement = "#shadow_host > #nested_shadow_host";
+        private readonly string _nestedShadowHostShadowContent = "div[id='nested_shadow_content']";
+        private readonly string _notExistsNestedShadowHostElement = "#shadow_host > #shadow_content";
+
+        #endregion
+
+        #region 'Chrome Settings' Tests
+
         [TestMethod]
-        [TestCategory("TESTS-DOTNETFRAMEWORK")]
-        public void Test_GetShadowRootElement_ShadowRootElementExists()
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_CHROME_SETTINGS)]
+        public void Test_GetShadowRootElement_ChromeSettings_ShadowRootElementExists()
         {
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
             var clearBrowsingTab = ShadowRootAssist.GetShadowRootElement(WebDriver, _existsShadowRootElement);
@@ -30,8 +47,8 @@ namespace ShadowRootDigger.NET.Tests
         }
 
         [TestMethod]
-        [TestCategory("TESTS-DOTNETFRAMEWORK")]
-        public void Test_GetShadowRootElement_ShadowRootElementDoesNotExists()
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_CHROME_SETTINGS)]
+        public void Test_GetShadowRootElement_ChromeSettings_ShadowRootElementDoesNotExists()
         {
             var expectedErrorMessage = "GetShadowRootElement: Shadow root element for selector 'not-exists' Not Found.";
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
@@ -45,8 +62,8 @@ namespace ShadowRootDigger.NET.Tests
         }
 
         [TestMethod]
-        [TestCategory("TESTS-DOTNETFRAMEWORK")]
-        public void Test_GetShadowRootElement_ImplicitWaitManipulationCheck_Exists()
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_CHROME_SETTINGS)]
+        public void Test_GetShadowRootElement_ChromeSettings_ImplicitWaitManipulationCheck_Exists()
         {
             var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
@@ -56,8 +73,8 @@ namespace ShadowRootDigger.NET.Tests
         }
 
         [TestMethod]
-        [TestCategory("TESTS-DOTNETFRAMEWORK")]
-        public void Test_GetShadowRootElement_ImplicitWaitManipulationCheck_NotExists()
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_CHROME_SETTINGS)]
+        public void Test_GetShadowRootElement_ChromeSettings_ImplicitWaitManipulationCheck_NotExists()
         {
             var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
@@ -75,8 +92,8 @@ namespace ShadowRootDigger.NET.Tests
         }
 
         [TestMethod]
-        [TestCategory("TESTS-DOTNETFRAMEWORK")]
-        public void Test_GetNestedShadowRootElement_ClearChromeData()
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_CHROME_SETTINGS)]
+        public void Test_GetNestedShadowRootElement_ChromeSettings_ClearChromeData()
         {
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
             var clearBrowsingTab = ShadowRootAssist.GetNestedShadowRootElement(WebDriver, _tabRootElement);
@@ -109,8 +126,8 @@ namespace ShadowRootDigger.NET.Tests
         }
 
         [TestMethod]
-        [TestCategory("TESTS-DOTNETFRAMEWORK")]
-        public void Test_GetNestedShadowRootElement_RootElementDoesNotExists()
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_CHROME_SETTINGS)]
+        public void Test_GetNestedShadowRootElement_ChromeSettings_RootElementDoesNotExists()
         {
             var expectedErrorMessage = "GetNestedShadowRootElement: Nested shadow root element for selector 'settings-main.main' in DOM hierarchy 'settings-ui > settings-main.main' Not Found.";
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
@@ -124,8 +141,8 @@ namespace ShadowRootDigger.NET.Tests
         }
 
         [TestMethod]
-        [TestCategory("TESTS-DOTNETFRAMEWORK")]
-        public void Test_GetNestedShadowRootElement_ImplicitWaitManipulationCheck_Exists()
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_CHROME_SETTINGS)]
+        public void Test_GetNestedShadowRootElement_ChromeSettings_ImplicitWaitManipulationCheck_Exists()
         {
             var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
@@ -135,8 +152,8 @@ namespace ShadowRootDigger.NET.Tests
         }
 
         [TestMethod]
-        [TestCategory("TESTS-DOTNETFRAMEWORK")]
-        public void Test_GetNestedShadowRootElement_ImplicitWaitManipulationCheck_NotExists()
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_CHROME_SETTINGS)]
+        public void Test_GetNestedShadowRootElement_ChromeSettings_ChromeSettings_ImplicitWaitManipulationCheck_NotExists()
         {
             var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
@@ -154,8 +171,8 @@ namespace ShadowRootDigger.NET.Tests
         }
 
         [TestMethod]
-        [TestCategory("TESTS-DOTNETFRAMEWORK")]
-        public void Test_IsShadowRootElementPresent_ShadowRootExists()
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_CHROME_SETTINGS)]
+        public void Test_IsShadowRootElementPresent_ChromeSettings_ShadowRootExists()
         {
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
             var exists = ShadowRootAssist.IsShadowRootElementPresent(WebDriver, _existsShadowRootElement);
@@ -163,8 +180,8 @@ namespace ShadowRootDigger.NET.Tests
         }
 
         [TestMethod]
-        [TestCategory("TESTS-DOTNETFRAMEWORK")]
-        public void Test_IsShadowRootElementPresent_ShadowRootNotExists()
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_CHROME_SETTINGS)]
+        public void Test_IsShadowRootElementPresent_ChromeSettings_ShadowRootNotExists()
         {
             var expectedErrorMessage = "IsShadowRootElementPresent: Shadow root element for selector 'not-exists' Not Found.";
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
@@ -180,8 +197,8 @@ namespace ShadowRootDigger.NET.Tests
         }
 
         [TestMethod]
-        [TestCategory("TESTS-DOTNETFRAMEWORK")]
-        public void Test_IsShadowRootElementPresent_ImplicitWaitManipulationCheck_Exists()
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_CHROME_SETTINGS)]
+        public void Test_IsShadowRootElementPresent_ChromeSettings_ImplicitWaitManipulationCheck_Exists()
         {
             var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
@@ -191,8 +208,8 @@ namespace ShadowRootDigger.NET.Tests
         }
 
         [TestMethod]
-        [TestCategory("TESTS-DOTNETFRAMEWORK")]
-        public void Test_IsShadowRootElementPresent_ImplicitWaitManipulationCheck_NotExists()
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_CHROME_SETTINGS)]
+        public void Test_IsShadowRootElementPresent_ChromeSettings_ImplicitWaitManipulationCheck_NotExists()
         {
             var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
@@ -213,8 +230,8 @@ namespace ShadowRootDigger.NET.Tests
         }
 
         [TestMethod]
-        [TestCategory("TESTS-DOTNETFRAMEWORK")]
-        public void Test_IsNestedShadowRootElementPresent_NestedShadowRootExists()
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_CHROME_SETTINGS)]
+        public void Test_IsNestedShadowRootElementPresent_ChromeSettings_NestedShadowRootExists()
         {
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
             var exists = ShadowRootAssist.IsNestedShadowRootElementPresent(WebDriver, _tabRootElement);
@@ -226,8 +243,8 @@ namespace ShadowRootDigger.NET.Tests
         }
 
         [TestMethod]
-        [TestCategory("TESTS-DOTNETFRAMEWORK")]
-        public void Test_IsNestedShadowRootElementPresent_NestedShadowRootNotExists()
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_CHROME_SETTINGS)]
+        public void Test_IsNestedShadowRootElementPresent_ChromeSettings_NestedShadowRootNotExists()
         {
             var expectedErrorMessage = "IsNestedShadowRootElementPresent: Nested shadow root element for selector 'settings-main.main' in DOM hierarchy 'settings-ui > settings-main.main' Not Found.";
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
@@ -243,8 +260,8 @@ namespace ShadowRootDigger.NET.Tests
         }
 
         [TestMethod]
-        [TestCategory("TESTS-DOTNETFRAMEWORK")]
-        public void Test_IsNestedShadowRootElementPresent_ImplicitWaitManipulationCheck_Exists()
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_CHROME_SETTINGS)]
+        public void Test_IsNestedShadowRootElementPresent_ChromeSettings_ImplicitWaitManipulationCheck_Exists()
         {
             var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
@@ -254,8 +271,8 @@ namespace ShadowRootDigger.NET.Tests
         }
 
         [TestMethod]
-        [TestCategory("TESTS-DOTNETFRAMEWORK")]
-        public void Test_IsNestedShadowRootElementPresent_ImplicitWaitManipulationCheck_NotExists()
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_CHROME_SETTINGS)]
+        public void Test_IsNestedShadowRootElementPresent_ChromeSettings_ImplicitWaitManipulationCheck_NotExists()
         {
             var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
@@ -274,5 +291,113 @@ namespace ShadowRootDigger.NET.Tests
                 Assert.AreEqual(implicitWaitBefore, implicitWaitAfter);
             }
         }
+
+        #endregion
+
+        #region 'Shadow DOM HTML' Tests
+
+        [TestMethod]
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_SHADOW_DOM_HTML)]
+        public void Test_GetShadowRootElement_ShadowDOMHTML_ShadowRootElementExists()
+        {
+            WebDriver.Navigate().GoToUrl(GetTestFilePath());
+            var shadowHost = ShadowRootAssist.GetShadowRootElement(WebDriver, _shadowHostElement);
+            Assert.IsNotNull(shadowHost);
+        }
+
+        [TestMethod]
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_SHADOW_DOM_HTML)]
+        public void Test_GetShadowRootElement_ShadowDOMHTML_ShadowRootElementDoesNotExists()
+        {
+            var expectedErrorMessage = "GetShadowRootElement: Shadow root element for selector '#non_host' Not Found.";
+            WebDriver.Navigate().GoToUrl(GetTestFilePath());
+            try
+            {
+                ShadowRootAssist.GetShadowRootElement(WebDriver, _notExistsShadowHostElement);
+                Assert.Fail("No Exception Thrown.");
+            }
+            catch (AssertFailedException ex) { throw ex; }
+            catch (WebDriverException ex) { Assert.AreEqual(expectedErrorMessage, ex.Message); }
+        }
+
+        [TestMethod]
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_SHADOW_DOM_HTML)]
+        public void Test_GetNestedShadowRootElement_ShadowDOMHTML_RootElementExists()
+        {
+            WebDriver.Navigate().GoToUrl(GetTestFilePath());
+            var nestedShadowHost = ShadowRootAssist.GetNestedShadowRootElement(WebDriver, _nestedShadowHostElement);
+            var nestedText = nestedShadowHost.FindElement(By.CssSelector(_nestedShadowHostShadowContent));
+            Assert.AreEqual("nested text", nestedText.Text);
+        }
+
+        [TestMethod]
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_SHADOW_DOM_HTML)]
+        public void Test_GetNestedShadowRootElement_ShadowDOMHTML_RootElementDoesNotExists()
+        {
+            var expectedErrorMessage = "GetNestedShadowRootElement: Nested shadow root element for selector '#shadow_content' in DOM hierarchy '#shadow_host > #shadow_content' Not Found.";
+            WebDriver.Navigate().GoToUrl(GetTestFilePath());
+            try
+            {
+                ShadowRootAssist.GetNestedShadowRootElement(WebDriver, _notExistsNestedShadowHostElement);
+                Assert.Fail("No Exception Thrown.");
+            }
+            catch (AssertFailedException ex) { throw ex; }
+            catch (WebDriverException ex) { Assert.AreEqual(expectedErrorMessage, ex.Message); }
+        }
+
+        [TestMethod]
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_SHADOW_DOM_HTML)]
+        public void Test_IsShadowRootElementPresent_ShadowDOMHTML_ShadowRootExists()
+        {
+            WebDriver.Navigate().GoToUrl(GetTestFilePath());
+            var exists = ShadowRootAssist.IsShadowRootElementPresent(WebDriver, _shadowHostElement);
+            Assert.AreEqual(true, exists);
+        }
+
+        [TestMethod]
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_SHADOW_DOM_HTML)]
+        public void Test_IsShadowRootElementPresent_ShadowDOMHTML_ShadowRootNotExists()
+        {
+            var expectedErrorMessage = "IsShadowRootElementPresent: Shadow root element for selector '#non_host' Not Found.";
+            WebDriver.Navigate().GoToUrl(GetTestFilePath());
+            var exists = ShadowRootAssist.IsShadowRootElementPresent(WebDriver, _notExistsShadowHostElement);
+            Assert.AreEqual(false, exists);
+            try
+            {
+                ShadowRootAssist.IsShadowRootElementPresent(WebDriver, _notExistsShadowHostElement, throwError: true);
+                Assert.Fail("No Exception Thrown.");
+            }
+            catch (AssertFailedException ex) { throw ex; }
+            catch (WebDriverException ex) { Assert.AreEqual(expectedErrorMessage, ex.Message); }
+        }
+
+        [TestMethod]
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_SHADOW_DOM_HTML)]
+        public void Test_IsNestedShadowRootElementPresent_ShadowDOMHTML_NestedShadowRootExists()
+        {
+            WebDriver.Navigate().GoToUrl(GetTestFilePath());
+            var exists = ShadowRootAssist.IsNestedShadowRootElementPresent(WebDriver, _nestedShadowHostElement);
+            Assert.AreEqual(true, exists);
+        }
+
+        [TestMethod]
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_SHADOW_DOM_HTML)]
+        public void Test_IsNestedShadowRootElementPresent_ShadowDOMHTML_NestedShadowRootNotExists()
+        {
+            var expectedErrorMessage = "IsNestedShadowRootElementPresent: Nested shadow root element for selector '#shadow_content' in DOM hierarchy '#shadow_host > #shadow_content' Not Found.";
+            WebDriver.Navigate().GoToUrl(GetTestFilePath());
+            var exists = ShadowRootAssist.IsNestedShadowRootElementPresent(WebDriver, _notExistsNestedShadowHostElement, timeInSeconds: 10);
+            Assert.AreEqual(false, exists);
+            try
+            {
+                ShadowRootAssist.IsNestedShadowRootElementPresent(WebDriver, _notExistsNestedShadowHostElement, timeInSeconds: 10, throwError: true);
+                Assert.Fail("No Exception Thrown.");
+            }
+            catch (AssertFailedException ex) { throw ex; }
+            catch (WebDriverException ex) { Assert.AreEqual(expectedErrorMessage, ex.Message); }
+        }
+
+        #endregion
+
     }
 }

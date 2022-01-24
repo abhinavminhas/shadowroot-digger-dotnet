@@ -39,11 +39,11 @@ The solution is built on .NetStandard 2.0
     **NOTE:** *Use **[jQuery Selectors](https://www.w3schools.com/jquery/jquery_ref_selectors.asp)** or **[CSS Selectors](https://www.w3schools.com/cssref/css_selectors.asp)** for shadow root host identifications.*
 
  Check the solution tests for more information.  
-**NOTE:** *Google Chrome & shadow DOM in Chrome settings along with [ShadowDOM.html](/TestFiles/ShadowDOM.html) have been used for testing the solution.*
+**NOTE:** *Google Chrome & shadow DOM in Chrome settings along with [ShadowDOM.html](/ShadowRootDigger.CORE.Tests/TestFiles/ShadowDOM.html) have been used for testing the solution.*
 
 ## Verified Versions
 
-   | Chrome | ChromeDriver | Microsoft Edge | Microsoft Edge Driver |
+   | Google Chrome | Chrome Driver | Microsoft Edge | Edge Driver |
    | ----------- | ----------- | ----------- | ----------- |
    | 92.0.4515.131 | 92.0.4515.107 | 95.0.1020.53 | 95.0.1020.53 |
    | 93.0.4577.82 | 93.0.4577.63 | 96.0.1054.62 | 96.0.1054.62 |

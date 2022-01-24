@@ -49,11 +49,11 @@ namespace ShadowRootDigger.CORE.Tests
         {
             var path = "";
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                path = Environment.CurrentDirectory + "\\TestFiles\\ShadowDOM.html";
+                path = "file:///" + Environment.CurrentDirectory + "/TestFiles/ShadowDOM.html";
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                path = Environment.CurrentDirectory + "/TestFiles/ShadowDOM.html";
+                path = "file:///" + Environment.CurrentDirectory + "/TestFiles/ShadowDOM.html";
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-                path = Environment.CurrentDirectory + "/TestFiles/ShadowDOM.html";
+                path = "file:///" + Environment.CurrentDirectory + "/TestFiles/ShadowDOM.html";
             return path;
         }
     }

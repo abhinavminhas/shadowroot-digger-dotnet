@@ -46,7 +46,7 @@ namespace ShadowRootDigger.NET.Tests
         /// <returns>Test files directory path.</returns>
         protected string GetTestFilePath()
         {
-            var path = Environment.CurrentDirectory + "\\TestFiles\\ShadowDOM.html";
+            var path = @"file:\\\" + Environment.CurrentDirectory + "\\TestFiles\\ShadowDOM.html";
             return path;
         }
     }

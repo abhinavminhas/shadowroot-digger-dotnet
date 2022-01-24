@@ -38,6 +38,7 @@ namespace ShadowRootDigger.NET.Tests
         public void QuitDriver()
         {
             WebDriver.Quit();
+            WebDriver.Dispose();
         }
 
         /// <summary>

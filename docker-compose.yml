@@ -17,6 +17,8 @@ services:
       - SCREEN_HEIGHT=1080
       - SE_NODE_OVERRIDE_MAX_SESSIONS=true
       - SE_NODE_MAX_SESSIONS=8
+    volumes:
+      - /home/runner/work/shadowroot-digger-dotnet/:/home/runner/work/shadowroot-digger-dotnet
     ports:
       - "5900:5900"
 

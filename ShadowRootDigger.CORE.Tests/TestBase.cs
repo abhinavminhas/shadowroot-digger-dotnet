@@ -4,6 +4,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Remote;
 using System;
 using System.Configuration;
+using System.Runtime.InteropServices;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 
@@ -14,6 +15,9 @@ namespace ShadowRootDigger.CORE.Tests
     {
         internal IWebDriver WebDriver;
         private readonly string _chromeDriverVersion = "97.0.4692.71";
+        protected const string TESTS_DOTNETCORE = "TESTS-DOTNETCORE";
+        protected const string DOTNETCORE_CHROME_SETTINGS = "DOTNETCORE-CHROME-SETTINGS";
+        protected const string DOTNETCORE_SHADOW_DOM_HTML = "DOTNETCORE-SHADOW-DOM-HTML";
 
         [TestInitialize]
         public void GetChromeDriver()
@@ -35,6 +39,23 @@ namespace ShadowRootDigger.CORE.Tests
         public void QuitDriver()
         {
             WebDriver.Quit();
+            WebDriver.Dispose();
+        }
+
+        /// <summary>
+        /// Gets test files directory path.
+        /// </summary>
+        /// <returns>Test files directory path.</returns>
+        protected string GetTestFilePath()
+        {
+            var path = "";
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                path = "file:///" + Environment.CurrentDirectory + "/TestFiles/ShadowDOM.html";
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                path = "file:///" + Environment.CurrentDirectory + "/TestFiles/ShadowDOM.html";
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                path = "file:///" + Environment.CurrentDirectory + "/TestFiles/ShadowDOM.html";
+            return path;
         }
     }
 }

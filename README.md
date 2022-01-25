@@ -13,7 +13,8 @@ The package is available and can be downloaded using [nuget.org](https://www.nug
 
 ## Features
 1. Returns shadow root or nested shadow root from DOM.
-2. Checks if shadow root or nested shadow root is present or not in the DOM.
+2. Checks if shadow root or nested shadow root is present or not in the DOM.  
+   **NOTE:** *Supports Selenium 3 (Check Selenium Dependency)*
 
 ## .NET Supported Versions
 The solution is built on .NetStandard 2.0  
@@ -22,30 +23,31 @@ The solution is built on .NetStandard 2.0
 ## Usage Guidelines
 1. Install the nuget package [ShadowRoot.Digger](https://www.nuget.org/packages/ShadowRoot.Digger/).  
 2. Use below extension methods to get shadow root or nested shadow root.  
-   Requried parameters - webdriver instance & shadow root selector identifier/s.
+   Requried parameters - webdriver instance & shadow root host selector identifier/s.
     ```
     ShadowRootAssist.GetShadowRootElement()
     ShadowRootAssist.GetNestedShadowRootElement()
     ```
     The returned shadow root element from above extension methods can be used to find element/s encapsulated within it.  
-    **NOTE:** *Use **[jQuery Selectors](https://www.w3schools.com/jquery/jquery_ref_selectors.asp)** or **[CSS Selectors](https://www.w3schools.com/cssref/css_selectors.asp)** for shadow root identifications.*
+    **NOTE:** *Use **[jQuery Selectors](https://www.w3schools.com/jquery/jquery_ref_selectors.asp)** or **[CSS Selectors](https://www.w3schools.com/cssref/css_selectors.asp)** for shadow root host identifications.*
 3. Use below extension methods for checking if shadow root or nested shadow root exists or not.  
-   Requried parameters - webdriver instance & shadow root selector identifier/s.
+   Requried parameters - webdriver instance & shadow root host selector identifier/s.
     ```
     ShadowRootAssist.IsShadowRootElementPresent()
     ShadowRootAssist.IsNestedShadowRootElementPresent()
     ```
-    **NOTE:** *Use **[jQuery Selectors](https://www.w3schools.com/jquery/jquery_ref_selectors.asp)** or **[CSS Selectors](https://www.w3schools.com/cssref/css_selectors.asp)** for shadow root identifications.*
+    **NOTE:** *Use **[jQuery Selectors](https://www.w3schools.com/jquery/jquery_ref_selectors.asp)** or **[CSS Selectors](https://www.w3schools.com/cssref/css_selectors.asp)** for shadow root host identifications.*
 
  Check the solution tests for more information.  
-**NOTE:** *Google Chrome & shadow DOM in Chrome settings have been used for testing the solution.*
+**NOTE:** *Google Chrome & shadow DOM in Chrome settings along with [ShadowDOM.html](/ShadowRootDigger.CORE.Tests/TestFiles/ShadowDOM.html) have been used for testing the solution.*
 
 ## Verified Versions
-   | Chrome | ChromeDriver |
-   | ----------- | ----------- |
-   | 92.0.4515.131 | 92.0.4515.107 |
-   | 93.0.4577.82 | 93.0.4577.63 |
-   | 94.0.4606.81 | 94.0.4606.61 |
-   | 95.0.4638.69 | 95.0.4638.54 |
-   | 96.0.4664.110 | 96.0.4664.45 |
-   | 97.0.4692.71 | 97.0.4692.71 |
+
+   | Google Chrome | Chrome Driver | Microsoft Edge | Edge Driver |
+   | ----------- | ----------- | ----------- | ----------- |
+   | 97.0.4692.71 | 97.0.4692.71 | 97.0.1072.69 | 97.0.1072.69 |
+   | 96.0.4664.110 | 96.0.4664.45 | 96.0.1054.62 | 96.0.1054.62 |
+   | 95.0.4638.69 | 95.0.4638.54 | 95.0.1020.53 | 95.0.1020.53 |
+   | 94.0.4606.81 | 94.0.4606.61 | 94.0.992.23 | 94.0.992.23 |
+   | 93.0.4577.82 | 93.0.4577.63 | 93.0.961.27 | 93.0.961.27 |
+   | 92.0.4515.131 | 92.0.4515.107 | 92.0.902.45 | 92.0.902.45 |

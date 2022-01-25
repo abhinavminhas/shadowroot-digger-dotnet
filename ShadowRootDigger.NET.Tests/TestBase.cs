@@ -14,6 +14,9 @@ namespace ShadowRootDigger.NET.Tests
     {
         internal IWebDriver WebDriver;
         private readonly string _chromeDriverVersion = "97.0.4692.71";
+        protected const string TESTS_DOTNETFRAMEWORK = "TESTS-DOTNETFRAMEWORK";
+        protected const string DOTNETFRAMEWORK_CHROME_SETTINGS = "DOTNETFRAMEWORK-CHROME-SETTINGS";
+        protected const string DOTNETFRAMEWORK_SHADOW_DOM_HTML = "DOTNETFRAMEWORK-SHADOW-DOM-HTML";
 
         [TestInitialize]
         public void GetChromeDriver()
@@ -35,6 +38,17 @@ namespace ShadowRootDigger.NET.Tests
         public void QuitDriver()
         {
             WebDriver.Quit();
+            WebDriver.Dispose();
+        }
+
+        /// <summary>
+        /// Gets test files directory path.
+        /// </summary>
+        /// <returns>Test files directory path.</returns>
+        protected string GetTestFilePath()
+        {
+            var path = @"file:\\\" + Environment.CurrentDirectory + "\\TestFiles\\ShadowDOM.html";
+            return path;
         }
     }
 }

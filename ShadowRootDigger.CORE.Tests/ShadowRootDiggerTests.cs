@@ -28,6 +28,9 @@ namespace ShadowRootDigger.CORE.Tests
         #region 'Shadow DOM HTML' Web Controls
 
         private readonly string _shadowHostElement = "#shadow_host";
+        private readonly string _shadowRootEnclosedInput = "input[type='text']";
+        private readonly string _shadowRootEnclosedCheckbox = "input[type='checkbox']";
+        private readonly string _shadowRootEnclosedInputChooseFile = "input[type='file']";
         private readonly string _notExistsShadowHostElement = "#non_host";
         private readonly string _nestedShadowHostElement = "#shadow_host > #nested_shadow_host";
         private readonly string _nestedShadowHostShadowContent = "div[id='nested_shadow_content']";
@@ -303,6 +306,12 @@ namespace ShadowRootDigger.CORE.Tests
             WebDriver.Navigate().GoToUrl(GetTestFilePath());
             var shadowHost = ShadowRootAssist.GetShadowRootElement(WebDriver, _shadowHostElement);
             Assert.IsNotNull(shadowHost);
+            var shadowInput = shadowHost.FindElement(By.CssSelector(_shadowRootEnclosedInput));
+            shadowInput.SendKeys("Input inside Shadow DOM");
+            var shadowCheckbox = shadowHost.FindElement(By.CssSelector(_shadowRootEnclosedCheckbox));
+            shadowCheckbox.Click();
+            var shadowInputFile = shadowHost.FindElement(By.CssSelector(_shadowRootEnclosedInputChooseFile));
+            Assert.IsNotNull(shadowInputFile);
         }
 
         [TestMethod]

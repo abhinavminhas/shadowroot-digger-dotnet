@@ -18,6 +18,7 @@ namespace ShadowRootDigger.CORE.Tests
         protected const string TESTS_DOTNETCORE = "TESTS-DOTNETCORE";
         protected const string DOTNETCORE_CHROME_SETTINGS = "DOTNETCORE-CHROME-SETTINGS";
         protected const string DOTNETCORE_SHADOW_DOM_HTML = "DOTNETCORE-SHADOW-DOM-HTML";
+        private int _retry = 0;
 
         [TestInitialize]
         public void GetChromeDriver()
@@ -26,13 +27,19 @@ namespace ShadowRootDigger.CORE.Tests
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.AddArguments("--disable-notifications");
             chromeOptions.AddArgument("--no-sandbox");
-            if (ConfigurationManager.AppSettings["UseDocker"].ToLower().Equals("true"))
-                WebDriver = new RemoteWebDriver(new Uri("http://localhost:4444/wd/hub/"), chromeOptions);
-            else
-                WebDriver = new ChromeDriver(chromeOptions);
-            WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(40);
-            WebDriver.Manage().Timeouts().PageLoad.Add(TimeSpan.FromSeconds(40));
-            WebDriver.Manage().Window.Maximize();
+            Retry:
+            try
+            {
+                _retry++;
+                if (ConfigurationManager.AppSettings["UseDocker"].ToLower().Equals("true"))
+                    WebDriver = new RemoteWebDriver(new Uri("http://localhost:4444/wd/hub/"), chromeOptions);
+                else
+                    WebDriver = new ChromeDriver(chromeOptions);
+                WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(40);
+                WebDriver.Manage().Timeouts().PageLoad.Add(TimeSpan.FromSeconds(40));
+                WebDriver.Manage().Window.Maximize();
+            }
+            catch (WebDriverException ex){ if (_retry <= 1) goto Retry; else throw ex;  }
         }
 
         [TestCleanup]

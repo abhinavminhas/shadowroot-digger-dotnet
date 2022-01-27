@@ -23,8 +23,6 @@ namespace ShadowRoot.Digger
         {
             IWebElement requiredShadowRoot = null;
             var shadowRootQuerySelector = "return document.querySelector('{0}').shadowRoot";
-            var GlobalDriverImplicitWait = webDriver.Manage().Timeouts().ImplicitWait.Ticks;
-            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds);
             var shadowRootElement = string.Format(shadowRootQuerySelector, shadowRootSelector);
             try
             {
@@ -44,10 +42,8 @@ namespace ShadowRoot.Digger
             }
             catch (WebDriverException)
             {
-                webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(GlobalDriverImplicitWait);
                 throw new WebDriverException(string.Format("{0}: Shadow root element for selector '{1}' Not Found.", MethodBase.GetCurrentMethod().Name, shadowRootSelector));
             }
-            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(GlobalDriverImplicitWait);
             return requiredShadowRoot;
         }
 
@@ -74,8 +70,6 @@ namespace ShadowRoot.Digger
                 var tempQueryString = string.Format(shadowRootQuerySelector, shadowRoot);
                 shadowRootQueryString += tempQueryString;
                 shadowRootElement = string.Format(documentReturn, shadowRootQueryString);
-                var GlobalDriverImplicitWait = webDriver.Manage().Timeouts().ImplicitWait.Ticks;
-                webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds);
                 try
                 {
                     var webDriverWait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeInSeconds))
@@ -94,10 +88,8 @@ namespace ShadowRoot.Digger
                 }
                 catch (WebDriverException)
                 {
-                    webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(GlobalDriverImplicitWait);
                     throw new WebDriverException(string.Format("{0}: Nested shadow root element for selector '{1}' in DOM hierarchy '{2}' Not Found.", MethodBase.GetCurrentMethod().Name, shadowRoot, shadowRootSelectors));
                 }
-                webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(GlobalDriverImplicitWait);
             }
             return requiredShadowRoot;
         }
@@ -117,8 +109,6 @@ namespace ShadowRoot.Digger
             var isPresent = false;
             var shadowRootQuerySelector = "return document.querySelector('{0}').shadowRoot";
             var shadowRootElement = string.Format(shadowRootQuerySelector, shadowRootSelector);
-            var GlobalDriverImplicitWait = webDriver.Manage().Timeouts().ImplicitWait.Ticks;
-            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds);
             try
             {
                 var webDriverWait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeInSeconds))
@@ -129,7 +119,9 @@ namespace ShadowRoot.Digger
                 var returnedObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
                 if (returnedObject is Dictionary<string, object> dictionary && dictionary.Keys.FirstOrDefault().Contains("shadow"))
                 {
-                    var remoteWebElement = new RemoteWebElement((RemoteWebDriver)webDriver, (string)dictionary.Values.First());
+                    webDriverWait.Until(item => returnedObject != null & returnedObject.GetType().Equals(typeof(Dictionary<string, object>)) == true);
+                    webDriverWait.Until(item => (new RemoteWebElement((RemoteWebDriver)webDriver, (string)dictionary.Values.First()) != null));
+                    webDriverWait.Until(item => (new RemoteWebElement((RemoteWebDriver)webDriver, (string)dictionary.Values.First()).GetType().Equals(typeof(RemoteWebElement)) == true));
                     isPresent = true;
                 }
                 else
@@ -140,13 +132,11 @@ namespace ShadowRoot.Digger
             }
             catch (WebDriverException)
             {
-                webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(GlobalDriverImplicitWait);
                 if (throwError)
                     throw new WebDriverException(string.Format("{0}: Shadow root element for selector '{1}' Not Found.", MethodBase.GetCurrentMethod().Name, shadowRootSelector));
                 else
                     isPresent = false;
             }
-            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(GlobalDriverImplicitWait);
             return isPresent;
         }
 
@@ -174,8 +164,6 @@ namespace ShadowRoot.Digger
                 var tempQueryString = string.Format(shadowRootQuerySelector, shadowRoot);
                 shadowRootQueryString += tempQueryString;
                 shadowRootElement = string.Format(documentReturn, shadowRootQueryString);
-                var GlobalDriverImplicitWait = webDriver.Manage().Timeouts().ImplicitWait.Ticks;
-                webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds);
                 try
                 {
                     var webDriverWait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeInSeconds))
@@ -186,7 +174,9 @@ namespace ShadowRoot.Digger
                     var returnedObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
                     if (returnedObject is Dictionary<string, object> dictionary && dictionary.Keys.FirstOrDefault().Contains("shadow"))
                     {
-                        var remoteWebElement = new RemoteWebElement((RemoteWebDriver)webDriver, (string)dictionary.Values.First());
+                        webDriverWait.Until(item => returnedObject != null & returnedObject.GetType().Equals(typeof(Dictionary<string, object>)) == true);
+                        webDriverWait.Until(item => (new RemoteWebElement((RemoteWebDriver)webDriver, (string)dictionary.Values.First()) != null));
+                        webDriverWait.Until(item => (new RemoteWebElement((RemoteWebDriver)webDriver, (string)dictionary.Values.First()).GetType().Equals(typeof(RemoteWebElement)) == true));
                         isPresent = true;
                     }
                     else
@@ -197,13 +187,11 @@ namespace ShadowRoot.Digger
                 }
                 catch (WebDriverException)
                 {
-                    webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(GlobalDriverImplicitWait);
                     if (throwError)
                         throw new WebDriverException(string.Format("{0}: Nested shadow root element for selector '{1}' in DOM hierarchy '{2}' Not Found.", MethodBase.GetCurrentMethod().Name, shadowRoot, shadowRootSelectors));
                     else
                         isPresent = false;
                 }
-                webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(GlobalDriverImplicitWait);
             }
             return isPresent;
         }

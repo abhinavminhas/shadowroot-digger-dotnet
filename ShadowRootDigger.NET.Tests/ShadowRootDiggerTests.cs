@@ -348,6 +348,40 @@ namespace ShadowRootDigger.NET.Tests
 
         [TestMethod]
         [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_SHADOW_DOM_HTML)]
+        public void Test_GetShadowRootElement_ShadowDOMHTML_ImplicitWaitManipulationCheck_Exists()
+        {
+            WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(0);
+            var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, 0);
+            WebDriver.Navigate().GoToUrl(GetTestFilePath());
+            ShadowRootAssist.GetShadowRootElement(WebDriver, _shadowHostElement);
+            var implicitWaitAfter = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, implicitWaitAfter);
+        }
+
+        [TestMethod]
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_SHADOW_DOM_HTML)]
+        public void Test_GetShadowRootElement_ShadowDOMHTML_ImplicitWaitManipulationCheck_NotExists()
+        {
+            WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(0);
+            var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, 0);
+            WebDriver.Navigate().GoToUrl(GetTestFilePath());
+            try
+            {
+                ShadowRootAssist.GetShadowRootElement(WebDriver, _notExistsShadowHostElement);
+                Assert.Fail("No Exception Thrown.");
+            }
+            catch (AssertFailedException ex) { throw ex; }
+            catch (WebDriverException)
+            {
+                var implicitWaitAfter = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+                Assert.AreEqual(implicitWaitBefore, implicitWaitAfter);
+            }
+        }
+
+        [TestMethod]
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_SHADOW_DOM_HTML)]
         public void Test_GetNestedShadowRootElement_ShadowDOMHTML_RootElementExists()
         {
             WebDriver.Navigate().GoToUrl(GetTestFilePath());
@@ -369,6 +403,40 @@ namespace ShadowRootDigger.NET.Tests
             }
             catch (AssertFailedException ex) { throw ex; }
             catch (WebDriverException ex) { Assert.AreEqual(expectedErrorMessage, ex.Message); }
+        }
+
+        [TestMethod]
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_SHADOW_DOM_HTML)]
+        public void Test_GetNestedShadowRootElement_ShadowDOMHTML_ImplicitWaitManipulationCheck_Exists()
+        {
+            WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(0);
+            var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, 0);
+            WebDriver.Navigate().GoToUrl(GetTestFilePath());
+            ShadowRootAssist.GetNestedShadowRootElement(WebDriver, _nestedShadowHostElement);
+            var implicitWaitAfter = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, implicitWaitAfter);
+        }
+
+        [TestMethod]
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_SHADOW_DOM_HTML)]
+        public void Test_GetNestedShadowRootElement_ShadowDOMHTML_ImplicitWaitManipulationCheck_NotExists()
+        {
+            WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(0);
+            var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, 0);
+            WebDriver.Navigate().GoToUrl(GetTestFilePath());
+            try
+            {
+                ShadowRootAssist.GetNestedShadowRootElement(WebDriver, _notExistsNestedShadowHostElement);
+                Assert.Fail("No Exception Thrown.");
+            }
+            catch (AssertFailedException ex) { throw ex; }
+            catch (WebDriverException)
+            {
+                var implicitWaitAfter = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+                Assert.AreEqual(implicitWaitBefore, implicitWaitAfter);
+            }
         }
 
         [TestMethod]
@@ -399,6 +467,43 @@ namespace ShadowRootDigger.NET.Tests
 
         [TestMethod]
         [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_SHADOW_DOM_HTML)]
+        public void Test_IsShadowRootElementPresent_ShadowDOMHTML_ImplicitWaitManipulationCheck_Exists()
+        {
+            WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(0);
+            var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, 0);
+            WebDriver.Navigate().GoToUrl(GetTestFilePath());
+            ShadowRootAssist.IsShadowRootElementPresent(WebDriver, _shadowHostElement);
+            var implicitWaitAfter = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, implicitWaitAfter);
+        }
+
+        [TestMethod]
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_SHADOW_DOM_HTML)]
+        public void Test_IsShadowRootElementPresent_ShadowDOMHTML_ImplicitWaitManipulationCheck_NotExists()
+        {
+            WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(0);
+            var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, 0);
+            WebDriver.Navigate().GoToUrl(GetTestFilePath());
+            ShadowRootAssist.IsShadowRootElementPresent(WebDriver, _notExistsShadowHostElement);
+            var implicitWaitAfter = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, implicitWaitAfter);
+            try
+            {
+                ShadowRootAssist.IsShadowRootElementPresent(WebDriver, _notExistsShadowHostElement, throwError: true);
+                Assert.Fail("No Exception Thrown.");
+            }
+            catch (AssertFailedException ex) { throw ex; }
+            catch (WebDriverException)
+            {
+                implicitWaitAfter = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+                Assert.AreEqual(implicitWaitBefore, implicitWaitAfter);
+            }
+        }
+
+        [TestMethod]
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_SHADOW_DOM_HTML)]
         public void Test_IsNestedShadowRootElementPresent_ShadowDOMHTML_NestedShadowRootExists()
         {
             WebDriver.Navigate().GoToUrl(GetTestFilePath());
@@ -421,6 +526,43 @@ namespace ShadowRootDigger.NET.Tests
             }
             catch (AssertFailedException ex) { throw ex; }
             catch (WebDriverException ex) { Assert.AreEqual(expectedErrorMessage, ex.Message); }
+        }
+
+        [TestMethod]
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_SHADOW_DOM_HTML)]
+        public void Test_IsNestedShadowRootElementPresent_ShadowDOMHTML_ImplicitWaitManipulationCheck_Exists()
+        {
+            WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(0);
+            var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, 0);
+            WebDriver.Navigate().GoToUrl(GetTestFilePath());
+            ShadowRootAssist.IsNestedShadowRootElementPresent(WebDriver, _nestedShadowHostElement);
+            var implicitWaitAfter = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, implicitWaitAfter);
+        }
+
+        [TestMethod]
+        [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_SHADOW_DOM_HTML)]
+        public void Test_IsNestedShadowRootElementPresent_ShadowDOMHTML_ImplicitWaitManipulationCheck_NotExists()
+        {
+            WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(0);
+            var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, 0);
+            WebDriver.Navigate().GoToUrl(GetTestFilePath());
+            ShadowRootAssist.IsNestedShadowRootElementPresent(WebDriver, _notExistsNestedShadowHostElement);
+            var implicitWaitAfter = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, implicitWaitAfter);
+            try
+            {
+                ShadowRootAssist.IsNestedShadowRootElementPresent(WebDriver, _notExistsNestedShadowHostElement, throwError: true);
+                Assert.Fail("No Exception Thrown.");
+            }
+            catch (AssertFailedException ex) { throw ex; }
+            catch (WebDriverException)
+            {
+                implicitWaitAfter = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+                Assert.AreEqual(implicitWaitBefore, implicitWaitAfter);
+            }
         }
 
         #endregion

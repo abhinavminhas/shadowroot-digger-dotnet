@@ -420,7 +420,7 @@ namespace ShadowRootDigger.CORE.Tests
 
         [TestMethod]
         [TestCategory(TESTS_DOTNETCORE), TestCategory(DOTNETCORE_SHADOW_DOM_HTML)]
-        public void Test_GetNestedShadowRootElement_ShadowDOMHTML_ChromeSettings_ImplicitWaitManipulationCheck_NotExists()
+        public void Test_GetNestedShadowRootElement_ShadowDOMHTML_ImplicitWaitManipulationCheck_NotExists()
         {
             WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(0);
             var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;

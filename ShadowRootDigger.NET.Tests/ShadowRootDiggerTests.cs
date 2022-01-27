@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using ShadowRoot.Digger;
+using System;
 using System.Linq;
 
 namespace ShadowRootDigger.NET.Tests
@@ -68,7 +69,9 @@ namespace ShadowRootDigger.NET.Tests
         [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_CHROME_SETTINGS)]
         public void Test_GetShadowRootElement_ChromeSettings_ImplicitWaitManipulationCheck_Exists()
         {
+            WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(0);
             var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, 0);
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
             ShadowRootAssist.GetShadowRootElement(WebDriver, _existsShadowRootElement);
             var implicitWaitAfter = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
@@ -79,7 +82,9 @@ namespace ShadowRootDigger.NET.Tests
         [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_CHROME_SETTINGS)]
         public void Test_GetShadowRootElement_ChromeSettings_ImplicitWaitManipulationCheck_NotExists()
         {
+            WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(0);
             var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, 0);
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
             try
             {
@@ -147,7 +152,9 @@ namespace ShadowRootDigger.NET.Tests
         [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_CHROME_SETTINGS)]
         public void Test_GetNestedShadowRootElement_ChromeSettings_ImplicitWaitManipulationCheck_Exists()
         {
+            WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(0);
             var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, 0);
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
             ShadowRootAssist.GetNestedShadowRootElement(WebDriver, _tabRootElement);
             var implicitWaitAfter = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
@@ -158,7 +165,9 @@ namespace ShadowRootDigger.NET.Tests
         [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_CHROME_SETTINGS)]
         public void Test_GetNestedShadowRootElement_ChromeSettings_ChromeSettings_ImplicitWaitManipulationCheck_NotExists()
         {
+            WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(0);
             var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, 0);
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
             try
             {
@@ -203,7 +212,9 @@ namespace ShadowRootDigger.NET.Tests
         [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_CHROME_SETTINGS)]
         public void Test_IsShadowRootElementPresent_ChromeSettings_ImplicitWaitManipulationCheck_Exists()
         {
+            WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(0);
             var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, 0);
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
             ShadowRootAssist.IsShadowRootElementPresent(WebDriver, _existsShadowRootElement);
             var implicitWaitAfter = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
@@ -214,7 +225,9 @@ namespace ShadowRootDigger.NET.Tests
         [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_CHROME_SETTINGS)]
         public void Test_IsShadowRootElementPresent_ChromeSettings_ImplicitWaitManipulationCheck_NotExists()
         {
+            WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(0);
             var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, 0);
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
             ShadowRootAssist.IsShadowRootElementPresent(WebDriver, _notExistsShadowRootElement);
             var implicitWaitAfter = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
@@ -266,7 +279,9 @@ namespace ShadowRootDigger.NET.Tests
         [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_CHROME_SETTINGS)]
         public void Test_IsNestedShadowRootElementPresent_ChromeSettings_ImplicitWaitManipulationCheck_Exists()
         {
+            WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(0);
             var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, 0);
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
             ShadowRootAssist.IsNestedShadowRootElementPresent(WebDriver, _tabRootElement);
             var implicitWaitAfter = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
@@ -277,7 +292,9 @@ namespace ShadowRootDigger.NET.Tests
         [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_CHROME_SETTINGS)]
         public void Test_IsNestedShadowRootElementPresent_ChromeSettings_ImplicitWaitManipulationCheck_NotExists()
         {
+            WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(0);
             var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            Assert.AreEqual(implicitWaitBefore, 0);
             WebDriver.Navigate().GoToUrl("chrome://settings/clearBrowserData");
             ShadowRootAssist.IsNestedShadowRootElementPresent(WebDriver, _notExistsNestedShadowRootElement);
             var implicitWaitAfter = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;

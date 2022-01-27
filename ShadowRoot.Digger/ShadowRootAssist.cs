@@ -68,14 +68,14 @@ namespace ShadowRoot.Digger
             var shadowRootQuerySelector = ".querySelector('{0}').shadowRoot";
             var shadowRootQueryString = "";
             var shadowRootElement = "";
+            var GlobalDriverImplicitWait = webDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds);
             foreach (var shadowRoot in listShadowRootSelectors)
             {
                 var documentReturn = "return document{0};";
                 var tempQueryString = string.Format(shadowRootQuerySelector, shadowRoot);
                 shadowRootQueryString += tempQueryString;
                 shadowRootElement = string.Format(documentReturn, shadowRootQueryString);
-                var GlobalDriverImplicitWait = webDriver.Manage().Timeouts().ImplicitWait.Ticks;
-                webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds);
                 try
                 {
                     var webDriverWait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeInSeconds))
@@ -97,8 +97,8 @@ namespace ShadowRoot.Digger
                     webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(GlobalDriverImplicitWait);
                     throw new WebDriverException(string.Format("{0}: Nested shadow root element for selector '{1}' in DOM hierarchy '{2}' Not Found.", MethodBase.GetCurrentMethod().Name, shadowRoot, shadowRootSelectors));
                 }
-                webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(GlobalDriverImplicitWait);
             }
+            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(GlobalDriverImplicitWait);
             return requiredShadowRoot;
         }
 
@@ -168,14 +168,14 @@ namespace ShadowRoot.Digger
             var shadowRootQuerySelector = ".querySelector('{0}').shadowRoot";
             var shadowRootQueryString = "";
             var shadowRootElement = "";
+            var GlobalDriverImplicitWait = webDriver.Manage().Timeouts().ImplicitWait.Ticks;
+            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds);
             foreach (var shadowRoot in listShadowRootSelectors)
             {
                 var documentReturn = "return document{0};";
                 var tempQueryString = string.Format(shadowRootQuerySelector, shadowRoot);
                 shadowRootQueryString += tempQueryString;
                 shadowRootElement = string.Format(documentReturn, shadowRootQueryString);
-                var GlobalDriverImplicitWait = webDriver.Manage().Timeouts().ImplicitWait.Ticks;
-                webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds);
                 try
                 {
                     var webDriverWait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(timeInSeconds))
@@ -203,8 +203,8 @@ namespace ShadowRoot.Digger
                     else
                         isPresent = false;
                 }
-                webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(GlobalDriverImplicitWait);
             }
+            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(GlobalDriverImplicitWait);
             return isPresent;
         }
     }

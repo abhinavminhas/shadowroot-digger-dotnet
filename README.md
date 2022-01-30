@@ -17,7 +17,7 @@ The package is available and can be downloaded using [nuget.org](https://www.nug
 1. Returns shadow root or nested shadow root from DOM.
 2. Checks if shadow root or nested shadow root is present or not in the DOM.  
    **NOTE:** *Supports Selenium 3 & 4.0.x versions (Check Selenium Dependency Before Use)*  
-   &emsp;&emsp;&emsp;&nbsp;For Selenium 3 - Use versions [1.x.x](https://www.nuget.org/packages/ShadowRoot.Digger/1.0.5).  
+   &emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;For Selenium 3 - Use versions [1.x.x](https://www.nuget.org/packages/ShadowRoot.Digger/1.0.5).  
 
 ## .NET Supported Versions
 The solution is built on .NetStandard 2.0  

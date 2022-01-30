@@ -34,7 +34,8 @@ namespace ShadowRoot.Digger
                 var returnedObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
                 if (returnedObject is Dictionary<string, object> dictionary && dictionary.Keys.FirstOrDefault().Contains("shadow"))
                 {
-                    var remoteWebElement = new RemoteWebElement((RemoteWebDriver)webDriver, (string)dictionary.Values.First());
+                    #pragma warning disable CS0618 // Type or member is obsolete
+                    var remoteWebElement = new RemoteWebElement((WebDriver)webDriver, (string)dictionary.Values.First());
                     requiredShadowRoot = remoteWebElement;
                 }
                 else
@@ -80,7 +81,8 @@ namespace ShadowRoot.Digger
                     var returnedObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
                     if (returnedObject is Dictionary<string, object> dictionary && dictionary.Keys.FirstOrDefault().Contains("shadow"))
                     {
-                        var remoteWebElement = new RemoteWebElement((RemoteWebDriver)webDriver, (string)dictionary.Values.First());
+                        #pragma warning disable CS0618 // Type or member is obsolete
+                        var remoteWebElement = new RemoteWebElement((WebDriver)webDriver, (string)dictionary.Values.First());
                         requiredShadowRoot = remoteWebElement;
                     }
                     else
@@ -120,13 +122,15 @@ namespace ShadowRoot.Digger
                 if (returnedObject is Dictionary<string, object> dictionary && dictionary.Keys.FirstOrDefault().Contains("shadow"))
                 {
                     webDriverWait.Until(item => returnedObject != null & returnedObject.GetType().Equals(typeof(Dictionary<string, object>)) == true);
-                    webDriverWait.Until(item => (new RemoteWebElement((RemoteWebDriver)webDriver, (string)dictionary.Values.First()) != null));
-                    webDriverWait.Until(item => (new RemoteWebElement((RemoteWebDriver)webDriver, (string)dictionary.Values.First()).GetType().Equals(typeof(RemoteWebElement)) == true));
+                    #pragma warning disable CS0618 // Type or member is obsolete
+                    webDriverWait.Until(item => (new RemoteWebElement((WebDriver)webDriver, (string)dictionary.Values.First()) != null));
+                    #pragma warning disable CS0618 // Type or member is obsolete
+                    webDriverWait.Until(item => (new RemoteWebElement((WebDriver)webDriver, (string)dictionary.Values.First()).GetType().Equals(typeof(RemoteWebElement)) == true));
                     isPresent = true;
                 }
                 else
                 {
-                    webDriverWait.Until(item => (IWebElement)returnedObject != null & returnedObject.GetType().Equals(typeof(RemoteWebElement)) == true);
+                    webDriverWait.Until(item => (IWebElement)returnedObject != null & returnedObject.GetType().Equals(typeof(WebElement)) == true);
                     isPresent = true;
                 }
             }
@@ -175,13 +179,15 @@ namespace ShadowRoot.Digger
                     if (returnedObject is Dictionary<string, object> dictionary && dictionary.Keys.FirstOrDefault().Contains("shadow"))
                     {
                         webDriverWait.Until(item => returnedObject != null & returnedObject.GetType().Equals(typeof(Dictionary<string, object>)) == true);
-                        webDriverWait.Until(item => (new RemoteWebElement((RemoteWebDriver)webDriver, (string)dictionary.Values.First()) != null));
-                        webDriverWait.Until(item => (new RemoteWebElement((RemoteWebDriver)webDriver, (string)dictionary.Values.First()).GetType().Equals(typeof(RemoteWebElement)) == true));
+                        #pragma warning disable CS0618 // Type or member is obsolete
+                        webDriverWait.Until(item => (new RemoteWebElement((WebDriver)webDriver, (string)dictionary.Values.First()) != null));
+                        #pragma warning disable CS0618 // Type or member is obsolete
+                        webDriverWait.Until(item => (new RemoteWebElement((WebDriver)webDriver, (string)dictionary.Values.First()).GetType().Equals(typeof(RemoteWebElement)) == true));
                         isPresent = true;
                     }
                     else
                     {
-                        webDriverWait.Until(item => (IWebElement)returnedObject != null & returnedObject.GetType().Equals(typeof(RemoteWebElement)) == true);
+                        webDriverWait.Until(item => (IWebElement)returnedObject != null & returnedObject.GetType().Equals(typeof(WebElement)) == true);
                         isPresent = true;
                     }
                 }

@@ -13,11 +13,11 @@ Features:
 1. Returns shadow root or nested shadow root from DOM.
 2. Checks if shadow root or nested shadow root is present or not in the DOM.
 
-NOTE: Supports 4.0.x versions (check Selenium dependency). For Selenium 3 - Use versions 1.x.x (check Selenium dependency).
+NOTE: Supports 4.0.x versions (check Selenium dependency).
 
 Solution Version:
 .NETStandard 2.0</Description>
-    <PackageReleaseNotes>1. This version supports Selenium 4.0.x due to the deprecation/change of Selenium method RemoteWebElement() used in Selenium 4 and change in the way shadow roots are searched in Selenium 4.
+    <PackageReleaseNotes>1. This version supports Selenium 4.0.x versions due to the deprecation/change of Selenium method RemoteWebElement() used in Selenium 4 and change in the way shadow roots are searched in Selenium 4.
 2. This version supports change in shadow root return values for Selenium in Chromium browsers (Google Chrome and Microsoft Edge) v96 and is backward compatible.</PackageReleaseNotes>
     <PackageTags>ShadowDOM, ShadowRoot, Selenium, QuerySelector, DOM</PackageTags>
     <Version>2.0.0</Version>

@@ -24,7 +24,7 @@ Solution Version:
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Selenium.WebDriver" Version="4.0.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.0.1" />
   </ItemGroup>
 
   <ItemGroup>

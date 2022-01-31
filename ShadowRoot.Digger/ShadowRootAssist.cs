@@ -18,10 +18,10 @@ namespace ShadowRoot.Digger
         /// <param name="shadowRootSelector">Shadow root element selectors (probably jQuery or CssSelectors).</param>
         /// <param name="timeInSeconds">Wait time in seconds. Default - '20 seconds'.</param>
         /// <param name="pollingIntervalInMilliseconds">Polling interval time in milliseconds. Default - '2000 milliseconds'.</param>
-        /// <returns>Shadow root web element.</returns>
-        public static IWebElement GetShadowRootElement(this IWebDriver webDriver, string shadowRootSelector, int timeInSeconds = 20, int pollingIntervalInMilliseconds = 2000)
+        /// <returns>Shadow root (ISearchContext).</returns>
+        public static ISearchContext GetShadowRootElement(this IWebDriver webDriver, string shadowRootSelector, int timeInSeconds = 20, int pollingIntervalInMilliseconds = 2000)
         {
-            IWebElement requiredShadowRoot = null;
+            ISearchContext requiredShadowRoot = null;
             var shadowRootQuerySelector = "return document.querySelector('{0}').shadowRoot";
             var shadowRootElement = string.Format(shadowRootQuerySelector, shadowRootSelector);
             try
@@ -32,14 +32,7 @@ namespace ShadowRoot.Digger
                 };
                 webDriverWait.Until(item => ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
                 var returnedObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
-                if (returnedObject is Dictionary<string, object> dictionary && dictionary.Keys.FirstOrDefault().Contains("shadow"))
-                {
-                    #pragma warning disable CS0618 // Type or member is obsolete
-                    var remoteWebElement = new RemoteWebElement((WebDriver)webDriver, (string)dictionary.Values.First());
-                    requiredShadowRoot = remoteWebElement;
-                }
-                else
-                    requiredShadowRoot = (IWebElement)returnedObject;
+                requiredShadowRoot = (ISearchContext)returnedObject;
             }
             catch (WebDriverException)
             {
@@ -56,10 +49,10 @@ namespace ShadowRoot.Digger
         /// <param name="shadowRootSelectors">List of shadow root element selectors (probably jQuery or CssSelectors) separated by '>'.</param>
         /// <param name="timeInSeconds">Wait time in seconds. Default - '20 seconds'.</param>
         /// <param name="pollingIntervalInMilliseconds">Polling interval time in milliseconds. Default - '2000 milliseconds'.</param>
-        /// <returns>Nested shadow root web element.</returns>
-        public static IWebElement GetNestedShadowRootElement(this IWebDriver webDriver, string shadowRootSelectors, int timeInSeconds = 20, int pollingIntervalInMilliseconds = 2000)
+        /// <returns>Nested shadow root (ISearchContext).</returns>
+        public static ISearchContext GetNestedShadowRootElement(this IWebDriver webDriver, string shadowRootSelectors, int timeInSeconds = 20, int pollingIntervalInMilliseconds = 2000)
         {
-            IWebElement requiredShadowRoot = null;
+            ISearchContext requiredShadowRoot = null;
             var listShadowRootSelectors = shadowRootSelectors.Split('>')
                 .Select(p => p.Trim()).Where(p => !string.IsNullOrWhiteSpace(p));
             var shadowRootQuerySelector = ".querySelector('{0}').shadowRoot";
@@ -79,14 +72,7 @@ namespace ShadowRoot.Digger
                     };
                     webDriverWait.Until(item => ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
                     var returnedObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
-                    if (returnedObject is Dictionary<string, object> dictionary && dictionary.Keys.FirstOrDefault().Contains("shadow"))
-                    {
-                        #pragma warning disable CS0618 // Type or member is obsolete
-                        var remoteWebElement = new RemoteWebElement((WebDriver)webDriver, (string)dictionary.Values.First());
-                        requiredShadowRoot = remoteWebElement;
-                    }
-                    else
-                        requiredShadowRoot = (IWebElement)returnedObject;
+                    requiredShadowRoot = (ISearchContext)returnedObject;
                 }
                 catch (WebDriverException)
                 {
@@ -119,20 +105,8 @@ namespace ShadowRoot.Digger
                 };
                 webDriverWait.Until(item => ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
                 var returnedObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
-                if (returnedObject is Dictionary<string, object> dictionary && dictionary.Keys.FirstOrDefault().Contains("shadow"))
-                {
-                    webDriverWait.Until(item => returnedObject != null & returnedObject.GetType().Equals(typeof(Dictionary<string, object>)) == true);
-                    #pragma warning disable CS0618 // Type or member is obsolete
-                    webDriverWait.Until(item => (new RemoteWebElement((WebDriver)webDriver, (string)dictionary.Values.First()) != null));
-                    #pragma warning disable CS0618 // Type or member is obsolete
-                    webDriverWait.Until(item => (new RemoteWebElement((WebDriver)webDriver, (string)dictionary.Values.First()).GetType().Equals(typeof(RemoteWebElement)) == true));
-                    isPresent = true;
-                }
-                else
-                {
-                    webDriverWait.Until(item => (IWebElement)returnedObject != null & returnedObject.GetType().Equals(typeof(WebElement)) == true);
-                    isPresent = true;
-                }
+                webDriverWait.Until(item => (ISearchContext)returnedObject != null);
+                isPresent = true;
             }
             catch (WebDriverException)
             {
@@ -176,20 +150,8 @@ namespace ShadowRoot.Digger
                     };
                     webDriverWait.Until(item => ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
                     var returnedObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
-                    if (returnedObject is Dictionary<string, object> dictionary && dictionary.Keys.FirstOrDefault().Contains("shadow"))
-                    {
-                        webDriverWait.Until(item => returnedObject != null & returnedObject.GetType().Equals(typeof(Dictionary<string, object>)) == true);
-                        #pragma warning disable CS0618 // Type or member is obsolete
-                        webDriverWait.Until(item => (new RemoteWebElement((WebDriver)webDriver, (string)dictionary.Values.First()) != null));
-                        #pragma warning disable CS0618 // Type or member is obsolete
-                        webDriverWait.Until(item => (new RemoteWebElement((WebDriver)webDriver, (string)dictionary.Values.First()).GetType().Equals(typeof(RemoteWebElement)) == true));
-                        isPresent = true;
-                    }
-                    else
-                    {
-                        webDriverWait.Until(item => (IWebElement)returnedObject != null & returnedObject.GetType().Equals(typeof(WebElement)) == true);
-                        isPresent = true;
-                    }
+                    webDriverWait.Until(item => (ISearchContext)returnedObject != null);
+                    isPresent = true;
                 }
                 catch (WebDriverException)
                 {

@@ -7,7 +7,9 @@
 
 One of the important aspect of web components is encapsulation and [Shadow DOM API](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) is a key part of this, allowing hidden DOM trees to be attached to elements in the regular DOM tree. This shadow DOM tree starts with a shadow root, underneath which any elements can be attached, in the same way as the normal DOM. The solution combines the power of [Document Query Selector API](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector)  with [Selenium](https://www.selenium.dev/) to grab such shadow root DOM trees and interact with any elements encapsulated within it.
 
-Selenium 3 - Check support [here](https://github.com/abhinavminhas/shadowroot-digger-dotnet/tree/Selenium-3-v1.0.x).  
+Selenium 4.1.x - Current supported package/solution version.  
+Selenium 4.0.x - Check support [here](https://github.com/abhinavminhas/shadowroot-digger-dotnet/tree/Selenium-4.0.x-2.0.x).  
+Selenium 3 - Check support [here](https://github.com/abhinavminhas/shadowroot-digger-dotnet/tree/Selenium-3-v1.0.x).
 
 ## Download
 The package is available and can be downloaded using [nuget.org](https://www.nuget.org/) package manager.  
@@ -16,8 +18,9 @@ The package is available and can be downloaded using [nuget.org](https://www.nug
 ## Features
 1. Returns shadow root or nested shadow root from DOM.
 2. Checks if shadow root or nested shadow root is present or not in the DOM.  
-   **NOTE:** *Supports Selenium 3 & 4.0.x versions (Check Selenium Dependency Before Use)*  
-   &emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;For Selenium 3 - Use versions [1.x.x](https://www.nuget.org/packages/ShadowRoot.Digger/1.0.5).  
+   **NOTE:** *Supports Selenium 3, 4.0.x & 4.1.x versions (Check Selenium Dependency Before Use)*  
+   &emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;For Selenium 4.0.x - Use versions [2.x.x](https://www.nuget.org/packages/ShadowRoot.Digger/2.0.0).  
+   &emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;For Selenium 3 - Use versions [1.x.x](https://www.nuget.org/packages/ShadowRoot.Digger/1.0.5).
 
 ## .NET Supported Versions
 The solution is built on .NetStandard 2.0  

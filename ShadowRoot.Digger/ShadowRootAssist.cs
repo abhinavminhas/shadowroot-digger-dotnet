@@ -16,7 +16,7 @@ namespace ShadowRoot.Digger
         /// <summary>
         /// Returns shadow root element for provided selector.
         /// </summary>
-        /// <param name="webDriver">Selenium webdriver instance.</param>
+        /// <param name="webDriver">Selenium web driver instance.</param>
         /// <param name="shadowRootSelector">Shadow root element selectors (probably jQuery or CssSelectors).</param>
         /// <param name="timeInSeconds">Wait time in seconds. Default - '20 seconds'.</param>
         /// <param name="pollingIntervalInMilliseconds">Polling interval time in milliseconds. Default - '2000 milliseconds'.</param>
@@ -47,7 +47,7 @@ namespace ShadowRoot.Digger
         /// <summary>
         /// Returns nested shadow root element from DOM hierarchy of shadow root elements with selectors separated by '>'.
         /// </summary>
-        /// <param name="webDriver">Selenium webdriver instance.</param>
+        /// <param name="webDriver">Selenium web driver instance.</param>
         /// <param name="shadowRootSelectors">List of shadow root element selectors (probably jQuery or CssSelectors) separated by '>'.</param>
         /// <param name="timeInSeconds">Wait time in seconds. Default - '20 seconds'.</param>
         /// <param name="pollingIntervalInMilliseconds">Polling interval time in milliseconds. Default - '2000 milliseconds'.</param>
@@ -88,7 +88,7 @@ namespace ShadowRoot.Digger
         /// <summary>
         /// Checks if the shadow root element exists or not.
         /// </summary>
-        /// <param name="webDriver">Selenium webdriver instance.</param>
+        /// <param name="webDriver">Selenium web driver instance.</param>
         /// <param name="shadowRootSelector">Shadow root element selectors (probably jQuery or CssSelectors).</param>
         /// <param name="throwError">Boolean value to throw error if nested shadow root element hierarchy does not exists. Default - 'false'.</param>
         /// <param name="timeInSeconds">Wait time in seconds. Default - '20 seconds'.</param>
@@ -124,7 +124,7 @@ namespace ShadowRoot.Digger
         /// <summary>
         /// Checks if the nested shadow root element hierarchy exists or not.
         /// </summary>
-        /// <param name="webDriver">Selenium webdriver instance.</param>
+        /// <param name="webDriver">Selenium web driver instance.</param>
         /// <param name="shadowRootSelectors">List of shadow root element selectors (probably jQuery or CssSelectors) separated by '>'.</param>
         /// <param name="throwError">Boolean value to throw error if nested shadow root element hierarchy does not exists. Default - 'false'.</param>
         /// <param name="timeInSeconds">Wait time in seconds. Default - '20 seconds'.</param>

@@ -48,7 +48,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ windows-latest, ubuntu-latest, macOS-latest ]
+        os: [ windows-2019, ubuntu-20.04, macOS-11 ]
         dotnet-version: [ '3.1.x', '5.0.x' ]
         
     steps:
@@ -66,5 +66,5 @@ jobs:
       run: dotnet build ShadowRootDigger.CORE.Tests/ShadowRootDigger.CORE.Tests.csproj --configuration Release
     
     - name: Test
-      if: ${{ matrix.os == 'windows-latest' && matrix.dotnet-version == '3.1.x' }}
+      if: ${{ matrix.os == 'windows-2019' && matrix.dotnet-version == '3.1.x' }}
       run: dotnet test --no-build --verbosity normal --configuration Release --settings:Test.runsettings --filter TestCategory=TESTS-DOTNETCORE

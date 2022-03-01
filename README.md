@@ -21,7 +21,7 @@ The solution is built on .NetStandard 2.0
 ## Usage Guidelines
 1. Install the nuget package [ShadowRoot.Digger](https://www.nuget.org/packages/ShadowRoot.Digger/).  
 2. Use below extension methods to get shadow root or nested shadow root.  
-   Requried parameters - webdriver instance & shadow root host selector identifier/s.
+   Required parameters - webdriver instance & shadow root host selector identifier/s.
     ```
     ShadowRootAssist.GetShadowRootElement()
     ShadowRootAssist.GetNestedShadowRootElement()
@@ -29,7 +29,7 @@ The solution is built on .NetStandard 2.0
     The returned shadow root element from above extension methods can be used to find element/s encapsulated within it.  
     **NOTE:** *Use **[jQuery Selectors](https://www.w3schools.com/jquery/jquery_ref_selectors.asp)** or **[CSS Selectors](https://www.w3schools.com/cssref/css_selectors.asp)** for shadow root host identifications.*
 3. Use below extension methods for checking if shadow root or nested shadow root exists or not.  
-   Requried parameters - webdriver instance & shadow root host selector identifier/s.
+   Required parameters - webdriver instance & shadow root host selector identifier/s.
     ```
     ShadowRootAssist.IsShadowRootElementPresent()
     ShadowRootAssist.IsNestedShadowRootElementPresent()

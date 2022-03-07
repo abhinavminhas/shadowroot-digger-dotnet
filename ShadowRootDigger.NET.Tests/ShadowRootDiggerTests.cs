@@ -163,7 +163,7 @@ namespace ShadowRootDigger.NET.Tests
 
         [TestMethod]
         [TestCategory(TESTS_DOTNETFRAMEWORK), TestCategory(DOTNETFRAMEWORK_CHROME_SETTINGS)]
-        public void Test_GetNestedShadowRootElement_ChromeSettings_ChromeSettings_ImplicitWaitManipulationCheck_NotExists()
+        public void Test_GetNestedShadowRootElement_ChromeSettings_ImplicitWaitManipulationCheck_NotExists()
         {
             WebDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(0);
             var implicitWaitBefore = WebDriver.Manage().Timeouts().ImplicitWait.Ticks;

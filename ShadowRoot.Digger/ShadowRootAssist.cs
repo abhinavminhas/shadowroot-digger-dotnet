@@ -31,6 +31,7 @@ namespace ShadowRoot.Digger
                 {
                     PollingInterval = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds)
                 };
+                webDriverWait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
                 webDriverWait.Until(item => ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
                 var returnedObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
                 requiredShadowRoot = (ISearchContext)returnedObject;
@@ -71,6 +72,7 @@ namespace ShadowRoot.Digger
                     {
                         PollingInterval = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds)
                     };
+                    webDriverWait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
                     webDriverWait.Until(item => ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
                     var returnedObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
                     requiredShadowRoot = (ISearchContext)returnedObject;
@@ -104,6 +106,7 @@ namespace ShadowRoot.Digger
                 {
                     PollingInterval = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds)
                 };
+                webDriverWait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
                 webDriverWait.Until(item => ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
                 var returnedObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
                 webDriverWait.Until(item => (ISearchContext)returnedObject != null);
@@ -149,6 +152,7 @@ namespace ShadowRoot.Digger
                     {
                         PollingInterval = TimeSpan.FromMilliseconds(pollingIntervalInMilliseconds)
                     };
+                    webDriverWait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
                     webDriverWait.Until(item => ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement) != null);
                     var returnedObject = ((IJavaScriptExecutor)webDriver).ExecuteScript(shadowRootElement);
                     webDriverWait.Until(item => (ISearchContext)returnedObject != null);

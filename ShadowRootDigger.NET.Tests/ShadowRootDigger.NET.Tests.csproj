@@ -87,10 +87,10 @@
     </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="WebDriver, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selenium.WebDriver.4.3.0\lib\net46\WebDriver.dll</HintPath>
+      <HintPath>..\packages\Selenium.WebDriver.4.4.0\lib\net46\WebDriver.dll</HintPath>
     </Reference>
     <Reference Include="WebDriver.Support, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selenium.Support.4.3.0\lib\net46\WebDriver.Support.dll</HintPath>
+      <HintPath>..\packages\Selenium.Support.4.4.0\lib\net46\WebDriver.Support.dll</HintPath>
     </Reference>
     <Reference Include="WebDriverManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\WebDriverManager.2.12.3\lib\net46\WebDriverManager.dll</HintPath>

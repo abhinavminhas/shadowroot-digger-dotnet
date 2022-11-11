@@ -20,7 +20,7 @@ jobs:
         
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         fetch-depth: 0
         
@@ -38,7 +38,7 @@ jobs:
         msbuild ShadowRoot.Digger.sln /p:configuration=Release /p:DeployExtension=false /p:ZipPackageCompressionLevel=normal /v:m
         
     - name: Setup-VSTest
-      uses: darenm/Setup-VSTest@v1
+      uses: darenm/Setup-VSTest@v1.2
       
     - name: Test
       run: vstest.console.exe ${{ github.workspace }}\ShadowRootDigger.NET.Tests\bin\Release\ShadowRootDigger.NET.Tests.dll /Settings:Test.runsettings /TestCaseFilter:"TestCategory=TESTS-DOTNETFRAMEWORK"
@@ -53,12 +53,12 @@ jobs:
         
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         fetch-depth: 0
 
     - name: Dotnet Version (${{ matrix.dotnet-version }})
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v3
       with:
         dotnet-version: ${{ matrix.dotnet-version }}
         

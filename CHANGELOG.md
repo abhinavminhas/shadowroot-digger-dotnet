@@ -2,6 +2,10 @@
 All notable changes to this project documented here.
 
 ## [Released]
+## [3.1.5](https://www.nuget.org/packages/ShadowRoot.Digger/3.1.5) - 2022-11-13
+### Changed
+- Selenium dependency update from 4.4.0 to 4.5.0.
+
 ## [3.1.4](https://www.nuget.org/packages/ShadowRoot.Digger/3.1.4) - 2022-08-31
 ### Changed
 - Selenium dependency update from 4.3.0 to 4.4.0.

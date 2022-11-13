@@ -17,13 +17,13 @@ NOTE: Supports 4.1.x+ versions (check Selenium dependency).
 
 Solution Version:
 .NETStandard 2.0</Description>
-    <PackageReleaseNotes>1. Selenium dependency update from 4.3.0 to 4.4.0.</PackageReleaseNotes>
+    <PackageReleaseNotes>1. Selenium dependency update from 4.4.0 to 4.5.0.</PackageReleaseNotes>
     <PackageTags>ShadowDOM, ShadowRoot, Selenium, QuerySelector, DOM</PackageTags>
-    <Version>3.1.4</Version>
+    <Version>3.1.5</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Selenium.WebDriver" Version="4.4.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.5.0" />
   </ItemGroup>
 
   <ItemGroup>

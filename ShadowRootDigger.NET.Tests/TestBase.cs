@@ -13,7 +13,7 @@ namespace ShadowRootDigger.NET.Tests
     public class TestBase
     {
         internal IWebDriver WebDriver;
-        private readonly string _chromeDriverVersion = "107.0.5304.62";
+        private readonly string _chromeDriverVersion = "111.0.5563.64";
         protected const string TESTS_DOTNETFRAMEWORK = "TESTS-DOTNETFRAMEWORK";
         protected const string DOTNETFRAMEWORK_CHROME_SETTINGS = "DOTNETFRAMEWORK-CHROME-SETTINGS";
         protected const string DOTNETFRAMEWORK_SHADOW_DOM_HTML = "DOTNETFRAMEWORK-SHADOW-DOM-HTML";

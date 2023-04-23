@@ -3,49 +3,53 @@ All notable changes to this project documented here.
 
 ## [Released]
 
+## [3.1.12](https://www.nuget.org/packages/ShadowRoot.Digger/3.1.12) - 2023-04-23
+### Changed
+- Selenium dependency update from '4.8.2' to '4.9.0'.
+
 ## [3.1.11](https://www.nuget.org/packages/ShadowRoot.Digger/3.1.11) - 2023-04-21
 ### Changed
-- Selenium dependency update from 4.8.1 to 4.8.2.
+- Selenium dependency update from '4.8.1' to '4.8.2'.
 
 ## [3.1.10](https://www.nuget.org/packages/ShadowRoot.Digger/3.1.10) - 2023-04-20
 ### Changed
-- Selenium dependency update from 4.8.0 to 4.8.1.
+- Selenium dependency update from '4.8.0' to '4.8.1'.
 
 ## [3.1.9](https://www.nuget.org/packages/ShadowRoot.Digger/3.1.9) - 2023-04-13
 ### Changed
-- Selenium dependency update from 4.7.0 to 4.8.0.
+- Selenium dependency update from '4.7.0' to '4.8.0'.
 
 ## [3.1.8](https://www.nuget.org/packages/ShadowRoot.Digger/3.1.8) - 2023-04-04
 ### Changed
-- Selenium dependency update from 4.6.0 to 4.7.0.
+- Selenium dependency update from '4.6.0' to '4.7.0'.
 
 ## [3.1.7](https://www.nuget.org/packages/ShadowRoot.Digger/3.1.7) - 2022-11-18
 ### Changed
-- Selenium dependency update from 4.5.1 to 4.6.0.
+- Selenium dependency update from '4.5.1' to '4.6.0'.
 
 ## [3.1.6](https://www.nuget.org/packages/ShadowRoot.Digger/3.1.6) - 2022-11-14
 ### Changed
-- Selenium dependency update from 4.5.0 to 4.5.1.
+- Selenium dependency update from '4.5.0' to '4.5.1'.
 
 ## [3.1.5](https://www.nuget.org/packages/ShadowRoot.Digger/3.1.5) - 2022-11-13
 ### Changed
-- Selenium dependency update from 4.4.0 to 4.5.0.
+- Selenium dependency update from '4.4.0' to '4.5.0'.
 
 ## [3.1.4](https://www.nuget.org/packages/ShadowRoot.Digger/3.1.4) - 2022-08-31
 ### Changed
-- Selenium dependency update from 4.3.0 to 4.4.0.
+- Selenium dependency update from '4.3.0' to '4.4.0'.
 
 ## [3.1.3](https://www.nuget.org/packages/ShadowRoot.Digger/3.1.3) - 2022-07-09
 ### Changed
-- Selenium dependency update from 4.2.0 to 4.3.0.
+- Selenium dependency update from '4.2.0' to '4.3.0'.
 
 ## [3.1.2](https://www.nuget.org/packages/ShadowRoot.Digger/3.1.2) - 2022-07-06
 ### Changed
-- Selenium dependency update from 4.1.1 to 4.2.0.
+- Selenium dependency update from '4.1.1' to '4.2.0'.
 
 ## [3.1.1](https://www.nuget.org/packages/ShadowRoot.Digger/3.1.1) - 2022-07-05
 ### Changed
-- Selenium dependency update from 4.1.0 to 4.1.1.
+- Selenium dependency update from '4.1.0' to '4.1.1'.
 
 ## [3.1.0](https://www.nuget.org/packages/ShadowRoot.Digger/3.1.0) - 2022-06-28
 ### Added
@@ -53,7 +57,7 @@ All notable changes to this project documented here.
 
 ## [3.0.0](https://www.nuget.org/packages/ShadowRoot.Digger/3.0.0) - 2022-02-02
 ### Changed
-- Selenium dependency update from 4.0.1 to 4.1.0.
+- Selenium dependency update from '4.0.1' to '4.1.0'.
 - Documentation updates.
 
 ### Notes
@@ -62,7 +66,7 @@ All notable changes to this project documented here.
 
 ## [2.0.1](https://www.nuget.org/packages/ShadowRoot.Digger/2.0.1) - 2022-01-30
 ### Changed
-- Selenium dependency update from 4.0.0 to 4.0.1.
+- Selenium dependency update from '4.0.0' to '4.0.1'.
 
 ### Notes
 - This version supports Selenium 4.0.x versions due to the deprecation/change of Selenium method RemoteWebElement() used in Selenium 4 and change in the way shadow roots are searched in Selenium 4.
@@ -70,7 +74,7 @@ All notable changes to this project documented here.
 
 ## [2.0.0](https://www.nuget.org/packages/ShadowRoot.Digger/2.0.0) - 2022-01-30
 ### Changed
-- Selenium dependency update from 3.141.0 to 4.0.0.
+- Selenium dependency update from '3.141.0' to '4.0.0'.
 
 ### Notes
 - This version supports Selenium 4.0.x versions due to the deprecation/change of Selenium method RemoteWebElement() used in Selenium 4 and change in the way shadow roots are searched in Selenium 4.

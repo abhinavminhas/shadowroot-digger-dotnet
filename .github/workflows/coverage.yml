@@ -1,7 +1,7 @@
 name: Code Coverage
 
 env:
-    SELENUM_HUB_TAG: "4.9.0"
+    SELENUM_HUB_TAG: "4.9.1"
     CHROME_NODE_TAG_1: "95.0-chromedriver-95.0"
     CHROME_NODE_TAG_2: "96.0-chromedriver-96.0"
 

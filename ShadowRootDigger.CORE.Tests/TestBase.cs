@@ -14,7 +14,7 @@ namespace ShadowRootDigger.CORE.Tests
     public class TestBase
     {
         internal IWebDriver WebDriver;
-        private readonly string _chromeDriverVersion = "113.0.5672.63";
+        private readonly string _chromeDriverVersion = "114.0.5735.90";
         protected const string TESTS_DOTNETCORE = "TESTS-DOTNETCORE";
         protected const string DOTNETCORE_CHROME_SETTINGS = "DOTNETCORE-CHROME-SETTINGS";
         protected const string DOTNETCORE_SHADOW_DOM_HTML = "DOTNETCORE-SHADOW-DOM-HTML";
